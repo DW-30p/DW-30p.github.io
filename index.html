@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Nuestra Galería ❤️</title>
-  <!-- Fuente elegante: Playfair Display -->
+  <title>Galería con Cloudinary</title>
+  <!-- Fuente elegante para estilo -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
   <style>
     body {
@@ -24,14 +24,27 @@
       background: #fff;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       border-radius: 10px;
+      text-align: center;
     }
-    .upload-container input[type="file"],
-    .upload-container input[type="text"],
-    .upload-container button {
+    #upload_widget {
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    #upload_widget:hover {
+      background-color: #0056b3;
+    }
+    #descriptionInput {
       width: 100%;
       padding: 10px;
-      margin: 10px 0;
+      margin-top: 10px;
       font-size: 1em;
+      box-sizing: border-box;
     }
     .gallery {
       display: flex;
@@ -61,104 +74,58 @@
 <body>
   <h1>Galería de Recuerdos</h1>
   <div class="upload-container">
-    <!-- Seleccionar imagen y escribir descripción -->
-    <input type="file" id="imageInput" accept="image/*">
+    <!-- Botón para abrir el widget de Cloudinary -->
+    <button id="upload_widget">Subir Imagen con Cloudinary</button>
+    <!-- Input para la descripción de la imagen -->
     <input type="text" id="descriptionInput" placeholder="Ej: 'En la playa con mi vida'">
-    <button id="uploadButton">Subir Imagen</button>
   </div>
+  <!-- Sección para mostrar las imágenes subidas -->
   <div class="gallery" id="gallery"></div>
 
-  <!-- Usando Firebase vía CDN con módulos -->
-  <script type="module">
-    // Importa las funciones necesarias desde Firebase
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-analytics.js";
-    import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-storage.js";
-    import { getFirestore, collection, addDoc, serverTimestamp, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
+  <!-- Script del widget de Cloudinary -->
+  <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    // Configura tu Cloudinary con tus datos
+    const cloudName = "dqdzng98y";       // Tu Cloud name
+    const uploadPreset = "my_preset";     // Tu upload preset unsigned
 
-    // Configuración de Firebase (reemplaza con la tuya)
-    const firebaseConfig = {
-      apiKey: "AIzaSyBo9syn1q-HdylCyiDgd6tufD6LcrX0cek",
-      authDomain: "only-for-you-bby.firebaseapp.com",
-      projectId: "only-for-you-bby",
-      storageBucket: "only-for-you-bby.firebasestorage.app",
-      messagingSenderId: "566014686966",
-      appId: "1:566014686966:web:28eab757f6802ac4371ed7",
-      measurementId: "G-CHCNM92PYZ"
-    };
-
-    // Inicializa Firebase
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-    const storage = getStorage(app);
-    const db = getFirestore(app);
-
-    // Elementos del DOM
-    const imageInput = document.getElementById('imageInput');
-    const descriptionInput = document.getElementById('descriptionInput');
-    const uploadButton = document.getElementById('uploadButton');
-    const gallery = document.getElementById('gallery');
-
-    // Función para subir la imagen y guardar la info en Firestore
-    uploadButton.addEventListener('click', async () => {
-      const file = imageInput.files[0];
-      const description = descriptionInput.value.trim();
-
-      if (!file || !description) {
-        alert('Por favor, selecciona una imagen y escribe una descripción.');
-        return;
-      }
-
-      try {
-        // Genera un nombre único para el archivo
-        const timestamp = Date.now();
-        const fileName = `${timestamp}_${file.name}`;
-        const imgRef = storageRef(storage, 'images/' + fileName);
-
-        // Sube la imagen a Firebase Storage
-        const snapshot = await uploadBytes(imgRef, file);
-        const downloadURL = await getDownloadURL(snapshot.ref);
-
-        // Guarda la URL y la descripción en Firestore
-        await addDoc(collection(db, 'galeria'), {
-          imageURL: downloadURL,
-          description: description,
-          createdAt: serverTimestamp()
-        });
-
-        // Limpia los campos y recarga la galería
-        imageInput.value = "";
-        descriptionInput.value = "";
-        loadGallery();
-      } catch (error) {
-        console.error("Error al subir la imagen:", error);
-        alert("Hubo un error al subir la imagen.");
+    // Crea el widget de Cloudinary
+    var myWidget = cloudinary.createUploadWidget({
+      cloudName: cloudName,
+      uploadPreset: uploadPreset
+    }, (error, result) => {
+      if (!error && result && result.event === "success") {
+        console.log("Imagen subida con éxito:", result.info);
+        // Obtén la URL segura de la imagen subida
+        const imageUrl = result.info.secure_url;
+        // Obtén la descripción ingresada
+        const description = document.getElementById("descriptionInput").value.trim();
+        // Agrega la imagen y la descripción a la galería
+        agregarImagenAGaleria(imageUrl, description);
       }
     });
 
-    // Función para cargar la galería desde Firestore
-    async function loadGallery() {
-      gallery.innerHTML = "";
-      const q = query(collection(db, 'galeria'), orderBy('createdAt', 'desc'));
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        const card = document.createElement('div');
-        card.classList.add('card');
+    // Al hacer clic en el botón, abre el widget
+    document.getElementById("upload_widget").addEventListener("click", function() {
+      myWidget.open();
+    }, false);
 
-        const img = document.createElement('img');
-        img.src = data.imageURL;
-        const desc = document.createElement('p');
-        desc.textContent = data.description;
+    // Función para agregar la imagen y su descripción a la galería en el DOM
+    function agregarImagenAGaleria(url, description) {
+      const gallery = document.getElementById("gallery");
+      const card = document.createElement("div");
+      card.classList.add("card");
 
-        card.appendChild(img);
-        card.appendChild(desc);
-        gallery.appendChild(card);
-      });
+      const img = document.createElement("img");
+      img.src = url;
+
+      const desc = document.createElement("p");
+      desc.textContent = description || "Sin descripción";
+
+      card.appendChild(img);
+      card.appendChild(desc);
+      gallery.appendChild(card);
     }
-
-    // Carga la galería cuando la página se inicia
-    loadGallery();
   </script>
 </body>
 </html>
