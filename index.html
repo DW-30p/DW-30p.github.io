@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Galería con Cloudinary</title>
+  <title> nuestra Galería amor</title>
   <!-- Fuente elegante para estilo -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
   <style>
@@ -74,18 +74,15 @@
 <body>
   <h1>Galería de Recuerdos</h1>
   <div class="upload-container">
-    <!-- Botón para abrir el widget de Cloudinary -->
     <button id="upload_widget">Subir Imagen con Cloudinary</button>
-    <!-- Input para la descripción de la imagen -->
     <input type="text" id="descriptionInput" placeholder="Ej: 'En la playa con mi vida'">
   </div>
-  <!-- Sección para mostrar las imágenes subidas -->
   <div class="gallery" id="gallery"></div>
 
-  <!-- Script del widget de Cloudinary -->
+  <!-- Widget de Cloudinary -->
   <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
   <script type="text/javascript">
-    // Configura tu Cloudinary con tus datos
+    // Reemplaza con tus datos de Cloudinary:
     const cloudName = "dqdzng98y";       // Tu Cloud name
     const uploadPreset = "my_preset";     // Tu upload preset unsigned
 
@@ -96,36 +93,53 @@
     }, (error, result) => {
       if (!error && result && result.event === "success") {
         console.log("Imagen subida con éxito:", result.info);
-        // Obtén la URL segura de la imagen subida
+        // Obtén la URL de la imagen
         const imageUrl = result.info.secure_url;
         // Obtén la descripción ingresada
         const description = document.getElementById("descriptionInput").value.trim();
-        // Agrega la imagen y la descripción a la galería
-        agregarImagenAGaleria(imageUrl, description);
+        // Guarda la imagen en localStorage y actualiza la galería
+        guardarImagen(imageUrl, description);
+        cargarGaleria();
       }
     });
 
-    // Al hacer clic en el botón, abre el widget
+    // Abre el widget al hacer clic en el botón
     document.getElementById("upload_widget").addEventListener("click", function() {
       myWidget.open();
     }, false);
 
-    // Función para agregar la imagen y su descripción a la galería en el DOM
-    function agregarImagenAGaleria(url, description) {
-      const gallery = document.getElementById("gallery");
-      const card = document.createElement("div");
-      card.classList.add("card");
-
-      const img = document.createElement("img");
-      img.src = url;
-
-      const desc = document.createElement("p");
-      desc.textContent = description || "Sin descripción";
-
-      card.appendChild(img);
-      card.appendChild(desc);
-      gallery.appendChild(card);
+    // Función para guardar la imagen y descripción en localStorage
+    function guardarImagen(url, description) {
+      let galeriaData = JSON.parse(localStorage.getItem("galeriaData")) || [];
+      galeriaData.push({ url, description });
+      localStorage.setItem("galeriaData", JSON.stringify(galeriaData));
+      // Limpia el input de descripción
+      document.getElementById("descriptionInput").value = "";
     }
+
+    // Función para cargar la galería desde localStorage
+    function cargarGaleria() {
+      const gallery = document.getElementById("gallery");
+      gallery.innerHTML = ""; // Limpia la galería actual
+      let galeriaData = JSON.parse(localStorage.getItem("galeriaData")) || [];
+      galeriaData.forEach(item => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+
+        const img = document.createElement("img");
+        img.src = item.url;
+
+        const desc = document.createElement("p");
+        desc.textContent = item.description || "Sin descripción";
+
+        card.appendChild(img);
+        card.appendChild(desc);
+        gallery.appendChild(card);
+      });
+    }
+
+    // Carga la galería cuando la página se inicia
+    window.addEventListener("load", cargarGaleria);
   </script>
 </body>
 </html>
