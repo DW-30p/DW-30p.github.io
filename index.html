@@ -2,144 +2,1036 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title> nuestra Galería amor❤️🤭</title>
-  <!-- Fuente elegante para estilo -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nuestra Galería de Amor ❤️</title>
+  <!-- Fuentes de Google -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Font Awesome para iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- AOS para animaciones de scroll -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
   <style>
-    body {
-      font-family: 'Playfair Display', serif;
-      background: #fafafa;
+    :root {
+      --primary-color: #ff6b6b;
+      --secondary-color: #4ecdc4;
+      --accent-color: #ffbe76;
+      --dark-color: #2d334a;
+      --light-color: #f8f9fa;
+      --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+
+    * {
       margin: 0;
-      padding: 20px;
-      color: #333;
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .upload-container {
-      max-width: 600px;
-      margin: 0 auto 30px auto;
-      padding: 20px;
-      background: #fff;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      border-radius: 10px;
-      text-align: center;
-    }
-    #upload_widget {
-      padding: 10px 20px;
-      font-size: 1em;
-      cursor: pointer;
-      background-color: #007BFF;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-    }
-    #upload_widget:hover {
-      background-color: #0056b3;
-    }
-    #descriptionInput {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      font-size: 1em;
+      padding: 0;
       box-sizing: border-box;
     }
-    .gallery {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      color: var(--dark-color);
     }
-    .card {
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      overflow: hidden;
-      max-width: 300px;
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 0;
+    }
+
+    /* Header y Hero section */
+    header {
       text-align: center;
+      padding: 2rem 0;
+      position: relative;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border-radius: 0 0 30px 30px;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
     }
-    .card img {
+
+    .hearts {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      display: block;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
     }
-    .card p {
-      padding: 10px;
-      margin: 0;
-      font-size: 1.1em;
+
+    .heart {
+      position: absolute;
+      color: var(--primary-color);
+      opacity: 0.2;
+      animation: float 15s infinite ease-in-out;
     }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-20px) rotate(10deg);
+      }
+    }
+
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3.5rem;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .subtitle {
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+      color: var(--dark-color);
+    }
+
+    /* Upload section */
+    .upload-container {
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      padding: 2rem;
+      background: white;
+      border-radius: 15px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .upload-container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .upload-title {
+      font-family: 'Dancing Script', cursive;
+      margin-bottom: 1.5rem;
+      color: var(--dark-color);
+    }
+
+    .upload-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    #upload_widget {
+      padding: 12px 25px;
+      font-size: 1rem;
+      cursor: pointer;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 0 auto;
+    }
+
+    #upload_widget:hover {
+      background-color: #ff5252;
+      transform: translateY(-2px);
+    }
+
+    .input-group {
+      position: relative;
+      margin-top: 1rem;
+    }
+
+    #descriptionInput, #dateInput, #locationInput {
+      width: 100%;
+      padding: 12px 15px;
+      font-size: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      transition: var(--transition);
+    }
+
+    #descriptionInput:focus, #dateInput:focus, #locationInput:focus {
+      border-color: var(--primary-color);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
+    }
+
+    .input-icon {
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
+      color: #aaa;
+    }
+
+    .icon-input {
+      padding-left: 40px;
+    }
+
+    /* Gallery section */
+    .gallery-container {
+      position: relative;
+      padding: 2rem 0;
+    }
+
+    .gallery-title {
+      text-align: center;
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: var(--dark-color);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+      padding: 1rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-10px) rotate(1deg);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-img-container {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      padding-top: 100%; /* 1:1 Aspect Ratio */
+    }
+
+    .card img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .card:hover img {
+      transform: scale(1.05);
+    }
+
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    .card-description {
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: #777;
+      margin-top: 1rem;
+    }
+
+    .card-date, .card-location {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .card-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #eee;
+    }
+
+    .btn {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: var(--transition);
+    }
+
+    .btn-favorite {
+      background-color: transparent;
+      color: #777;
+    }
+
+    .btn-favorite.active, .btn-favorite:hover {
+      color: var(--primary-color);
+    }
+
+    .btn-delete {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+
+    .btn-delete:hover {
+      background-color: #f5c6cb;
+    }
+
+    /* Filters and search */
+    .filters {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .search-box {
+      position: relative;
+      flex: 1;
+      max-width: 300px;
+    }
+
+    #searchInput {
+      width: 100%;
+      padding: 10px 40px 10px 15px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #aaa;
+    }
+
+    .sort-options {
+      display: flex;
+      gap: 10px;
+    }
+
+    .sort-btn {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      padding: 8px 15px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .sort-btn:hover, .sort-btn.active {
+      background-color: var(--primary-color);
+      color: white;
+      border-color: var(--primary-color);
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: white;
+      border-radius: 15px;
+      box-shadow: var(--shadow);
+    }
+
+    .empty-state i {
+      font-size: 4rem;
+      color: #ddd;
+      margin-bottom: 1rem;
+    }
+
+    .empty-state h3 {
+      margin-bottom: 1rem;
+      color: var(--dark-color);
+    }
+
+    .empty-state p {
+      color: #777;
+      margin-bottom: 2rem;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      margin-top: 3rem;
+      color: var(--dark-color);
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border-radius: 30px 30px 0 0;
+    }
+
+    .footer-heart {
+      color: var(--primary-color);
+      display: inline-block;
+      animation: heartbeat 1.5s infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal {
+      background: white;
+      width: 90%;
+      max-width: 900px;
+      border-radius: 15px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      max-height: 90vh;
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+
+    .modal-overlay.active .modal {
+      transform: translateY(0);
+    }
+
+    .modal-header {
+      padding: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #eee;
+    }
+
+    .modal-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #777;
+      transition: var(--transition);
+    }
+
+    .modal-close:hover {
+      color: var(--primary-color);
+    }
+
+    .modal-body {
+      padding: 2rem;
+      overflow-y: auto;
+    }
+
+    .modal-image {
+      width: 100%;
+      max-height: 60vh;
+      object-fit: contain;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-description {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .modal-meta {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+      color: #777;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      }
+      
+      .filters {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .search-box {
+        max-width: 100%;
+      }
+      
+      .upload-container {
+        padding: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        width: 95%;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+      
+      .card-actions {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .upload-form {
+        gap: 0.5rem;
+      }
+    }
+
+    /* Animaciones de entrada para las tarjetas */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card {
+      animation: fadeInUp 0.6s ease backwards;
+    }
+
+    .card:nth-child(1) { animation-delay: 0.1s; }
+    .card:nth-child(2) { animation-delay: 0.2s; }
+    .card:nth-child(3) { animation-delay: 0.3s; }
+    .card:nth-child(4) { animation-delay: 0.4s; }
+    .card:nth-child(5) { animation-delay: 0.5s; }
+    .card:nth-child(n+6) { animation-delay: 0.6s; }
   </style>
 </head>
 <body>
-  <h1>Galería de Recuerdos</h1>
-  <div class="upload-container">
-    <button id="upload_widget">Subir Imagen con Cloudinary</button>
-    <input type="text" id="descriptionInput" placeholder="Ej: 'En la playa con mi vida'">
-  </div>
-  <div class="gallery" id="gallery"></div>
+  <!-- Header -->
+  <header>
+    <div class="hearts" id="hearts"></div>
+    <div class="container">
+      <h1>Nuestra Galería de Amor</h1>
+      <p class="subtitle">Donde guardamos nuestros momentos especiales juntos ❤️</p>
+    </div>
+  </header>
 
-  <!-- Widget de Cloudinary -->
+  <!-- Main content -->
+  <main class="container">
+    <!-- Upload section -->
+    <section class="upload-container" data-aos="fade-up">
+      <h2 class="upload-title">Añadir un nuevo recuerdo</h2>
+      <div class="upload-form">
+        <button id="upload_widget"><i class="fas fa-cloud-upload-alt"></i> Subir Imagen</button>
+        
+        <div class="input-group">
+          <input type="text" id="descriptionInput" placeholder="Describe este momento especial...">
+        </div>
+        
+        <div class="input-group">
+          <input type="text" id="dateInput" class="icon-input" placeholder="Fecha (opcional)">
+          <i class="fas fa-calendar input-icon"></i>
+        </div>
+        
+        <div class="input-group">
+          <input type="text" id="locationInput" class="icon-input" placeholder="Lugar (opcional)">
+          <i class="fas fa-map-marker-alt input-icon"></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery section -->
+    <section class="gallery-container">
+      <h2 class="gallery-title" data-aos="fade-up">Nuestros Recuerdos</h2>
+      
+      <!-- Filters and search -->
+      <div class="filters" data-aos="fade-up">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Buscar recuerdos...">
+          <i class="fas fa-search search-icon"></i>
+        </div>
+        
+        <div class="sort-options">
+          <button class="sort-btn active" data-sort="newest">Más recientes</button>
+          <button class="sort-btn" data-sort="oldest">Más antiguos</button>
+          <button class="sort-btn" data-sort="favorites">Favoritos</button>
+        </div>
+      </div>
+      
+      <!-- Gallery grid -->
+      <div class="gallery" id="gallery">
+        <!-- Las tarjetas se generarán dinámicamente aquí -->
+      </div>
+      
+      <!-- Empty state - se muestra cuando no hay imágenes -->
+      <div class="empty-state" id="emptyState" style="display: none;">
+        <i class="far fa-images"></i>
+        <h3>No hay recuerdos todavía</h3>
+        <p>¡Comienza a subir imágenes para crear tu galería de amor!</p>
+        <button id="firstUploadBtn" class="btn" style="margin: 0 auto; background: var(--primary-color); color: white; padding: 12px 25px;">
+          <i class="fas fa-plus"></i> Añadir primer recuerdo
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>Creado con <span class="footer-heart">❤️</span> para nuestros recuerdos</p>
+  </footer>
+
+  <!-- Modal para ver imagen en grande -->
+  <div class="modal-overlay" id="imageModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title">Nuestro recuerdo</h3>
+        <button class="modal-close" id="modalClose">&times;</button>
+      </div>
+      <div class="modal-body">
+        <img src="" alt="Imagen ampliada" class="modal-image" id="modalImage">
+        <p class="modal-description" id="modalDescription"></p>
+        <div class="modal-meta">
+          <div class="modal-date" id="modalDate">
+            <i class="fas fa-calendar"></i>
+            <span></span>
+          </div>
+          <div class="modal-location" id="modalLocation">
+            <i class="fas fa-map-marker-alt"></i>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
   <script type="text/javascript">
-    // Reemplaza con tus datos de Cloudinary:
-    const cloudName = "dqdzng98y";       // Tu Cloud name
-    const uploadPreset = "my_preset";     // Tu upload preset unsigned
+    // Inicializar AOS (Animate On Scroll)
+    AOS.init({
+      duration: 800,
+      once: true
+    });
 
-    // Crea el widget de Cloudinary
+    // Crear corazones flotantes en el fondo del header
+    function createHearts() {
+      const heartsContainer = document.getElementById('hearts');
+      const numberOfHearts = 15;
+      
+      for (let i = 0; i < numberOfHearts; i++) {
+        const heart = document.createElement('i');
+        heart.classList.add('fas', 'fa-heart', 'heart');
+        
+        // Posición aleatoria
+        const left = Math.random() * 100;
+        const top = Math.random() * 100;
+        const size = Math.random() * 1.5 + 0.5; // Tamaño entre 0.5 y 2em
+        const delay = Math.random() * 15; // Delay de animación
+        
+        heart.style.left = `${left}%`;
+        heart.style.top = `${top}%`;
+        heart.style.fontSize = `${size}em`;
+        heart.style.animationDelay = `${delay}s`;
+        
+        heartsContainer.appendChild(heart);
+      }
+    }
+    
+    // Configuración de Cloudinary
+    const cloudName = "dqdzng98y";
+    const uploadPreset = "my_preset";
+
+    // Crear el widget de Cloudinary
     var myWidget = cloudinary.createUploadWidget({
       cloudName: cloudName,
-      uploadPreset: uploadPreset
+      uploadPreset: uploadPreset,
+      cropping: true,
+      maxFiles: 1,
+      sources: ['local', 'camera', 'url'],
+      styles: {
+        palette: {
+          window: "#FFFFFF",
+          sourceBg: "#F4F4F5",
+          windowBorder: "#ff6b6b",
+          tabIcon: "#ff6b6b",
+          inactiveTabIcon: "#aaaaaa",
+          menuIcons: "#555555",
+          link: "#ff6b6b",
+          action: "#339933",
+          inProgress: "#0433ff",
+          complete: "#339933",
+          error: "#cc3333",
+          textDark: "#000000",
+          textLight: "#fcfcfc"
+        }
+      }
     }, (error, result) => {
       if (!error && result && result.event === "success") {
         console.log("Imagen subida con éxito:", result.info);
-        // Obtén la URL de la imagen
+        
+        // Obtener datos de la imagen
         const imageUrl = result.info.secure_url;
-        // Obtén la descripción ingresada
         const description = document.getElementById("descriptionInput").value.trim();
-        // Guarda la imagen en localStorage y actualiza la galería
-        guardarImagen(imageUrl, description);
+        const date = document.getElementById("dateInput").value.trim();
+        const location = document.getElementById("locationInput").value.trim();
+        
+        // Guardar la imagen en localStorage
+        guardarImagen(imageUrl, description, date, location);
+        
+        // Actualizar la galería
         cargarGaleria();
+        
+        // Limpiar formulario
+        document.getElementById("descriptionInput").value = "";
+        document.getElementById("dateInput").value = "";
+        document.getElementById("locationInput").value = "";
+        
+        // Mostrar mensaje de éxito
+        mostrarNotificacion('¡Recuerdo guardado con éxito!');
       }
     });
 
     // Abre el widget al hacer clic en el botón
     document.getElementById("upload_widget").addEventListener("click", function() {
       myWidget.open();
-    }, false);
+    });
+    
+    // También abrir el widget desde el botón de "añadir primer recuerdo"
+    document.getElementById("firstUploadBtn").addEventListener("click", function() {
+      myWidget.open();
+    });
 
-    // Función para guardar la imagen y descripción en localStorage
-    function guardarImagen(url, description) {
+    // Función para guardar la imagen y datos en localStorage
+    function guardarImagen(url, description, date, location) {
       let galeriaData = JSON.parse(localStorage.getItem("galeriaData")) || [];
-      galeriaData.push({ url, description });
+      
+      // Crear un objeto con todos los datos
+      const nuevoRecuerdo = {
+        url: url,
+        description: description || "Sin descripción",
+        date: date || "",
+        location: location || "",
+        timestamp: new Date().getTime(),
+        favorite: false,
+        id: generateUniqueId()
+      };
+      
+      galeriaData.push(nuevoRecuerdo);
       localStorage.setItem("galeriaData", JSON.stringify(galeriaData));
-      // Limpia el input de descripción
-      document.getElementById("descriptionInput").value = "";
+    }
+    
+    // Generar ID único para cada recuerdo
+    function generateUniqueId() {
+      return Math.random().toString(36).substring(2) + Date.now().toString(36);
     }
 
     // Función para cargar la galería desde localStorage
     function cargarGaleria() {
       const gallery = document.getElementById("gallery");
-      gallery.innerHTML = ""; // Limpia la galería actual
+      const emptyState = document.getElementById("emptyState");
+      
       let galeriaData = JSON.parse(localStorage.getItem("galeriaData")) || [];
-      galeriaData.forEach(item => {
+      
+      // Verificar si hay recuerdos
+      if (galeriaData.length === 0) {
+        gallery.style.display = "none";
+        emptyState.style.display = "block";
+        return;
+      } else {
+        gallery.style.display = "grid";
+        emptyState.style.display = "none";
+      }
+      
+      // Ordenar por recientes (predeterminado)
+      galeriaData.sort((a, b) => b.timestamp - a.timestamp);
+      
+      // Aplicar el filtro activo
+      const activeSort = document.querySelector('.sort-btn.active').dataset.sort;
+      if (activeSort === "oldest") {
+        galeriaData.sort((a, b) => a.timestamp - b.timestamp);
+      } else if (activeSort === "favorites") {
+        galeriaData.sort((a, b) => {
+          if (a.favorite === b.favorite) return b.timestamp - a.timestamp;
+          return a.favorite ? -1 : 1;
+        });
+      }
+      
+      // Aplicar el filtro de búsqueda
+      const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+      if (searchTerm) {
+        galeriaData = galeriaData.filter(item => 
+          item.description.toLowerCase().includes(searchTerm) || 
+          item.location.toLowerCase().includes(searchTerm) ||
+          item.date.toLowerCase().includes(searchTerm)
+        );
+      }
+      
+      // Limpiar la galería actual
+      gallery.innerHTML = "";
+      
+      // Crear las tarjetas para cada recuerdo
+      galeriaData.forEach((item, index) => {
         const card = document.createElement("div");
         card.classList.add("card");
-
-        const img = document.createElement("img");
-        img.src = item.url;
-
-        const desc = document.createElement("p");
-        desc.textContent = item.description || "Sin descripción";
-
-        card.appendChild(img);
-        card.appendChild(desc);
+        card.setAttribute("data-aos", "fade-up");
+        card.setAttribute("data-aos-delay", (index % 5) * 100);
+        
+        // Formatear la fecha para mostrar
+        const formattedDate = item.date || "Sin fecha";
+        
+        // Crear el HTML de la tarjeta
+        card.innerHTML = `
+          <div class="card-img-container">
+            <img src="${item.url}" alt="${item.description}" loading="lazy">
+          </div>
+          <div class="card-content">
+            <p class="card-description">${item.description}</p>
+            <div class="card-meta">
+              ${item.date ? `<div class="card-date"><i class="fas fa-calendar"></i> ${item.date}</div>` : ''}
+              ${item.location ? `<div class="card-location"><i class="fas fa-map-marker-alt"></i> ${item.location}</div>` : ''}
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-favorite ${item.favorite ? 'active' : ''}" data-id="${item.id}">
+                <i class="fas fa-heart"></i> ${item.favorite ? 'Favorito' : 'Marcar favorito'}
+              </button>
+              <button class="btn btn-delete" data-id="${item.id}">
+                <i class="fas fa-trash"></i> Eliminar
+              </button>
+            </div>
+          </div>
+        `;
+        
         gallery.appendChild(card);
+        
+        // Añadir evento para ver la imagen en grande
+        const imgContainer = card.querySelector('.card-img-container');
+        imgContainer.addEventListener('click', () => {
+          abrirModal(item);
+        });
+        
+        // Añadir evento para marcar como favorito
+        const favBtn = card.querySelector('.btn-favorite');
+        favBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          toggleFavorite(item.id);
+        });
+        
+        // Añadir evento para eliminar
+        const deleteBtn = card.querySelector('.btn-delete');
+        deleteBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          eliminarRecuerdo(item.id);
+        });
       });
+      
+      // Reinicializar AOS para las nuevas tarjetas
+      AOS.refresh();
     }
-
-    // Carga la galería cuando la página se inicia
-    window.addEventListener("load", cargarGaleria);
+    
+    // Función para marcar/desmarcar como favorito
+    function toggleFavorite(id) {
+      let galeriaData = JSON.parse(localStorage.getItem("galeriaData")) || [];
+      
+      // Encontrar y actualizar el recuerdo
+      const index = galeriaData.findIndex(item => item.id === id);
+      if (index !== -1) {
+        galeriaData[index].favorite = !galeriaData[index].favorite;
+        localStorage.setItem("galeriaData", JSON.stringify(galeriaData));
+        
+        // Actualizar la galería
+        cargarGaleria();
+        
+        // Mostrar mensaje
+        const mensaje = galeriaData[index].favorite ? 
+          '¡Añadido a favoritos!' : 
+          'Eliminado de favoritos';
+        mostrarNotificacion(mensaje);
+      }
+    }
+    
+    // Función para eliminar un recuerdo
+    function eliminarRecuerdo(id) {
+      if (confirm("¿Estás seguro de que quieres eliminar este recuerdo?")) {
+        let galeriaData = JSON.parse(localStorage.getItem("galeriaData")) || [];
+        
+        // Filtrar el recuerdo a eliminar
+        galeriaData = galeriaData.filter(item => item.id !== id);
+        localStorage.setItem("galeriaData", JSON.stringify(galeriaData));
+        
+        // Actualizar la galería
+        cargarGaleria();
+        
+        // Mostrar mensaje
+        mostrarNotificacion('Recuerdo eliminado correctamente');
+      }
+    }
+    
+    // Función para abrir el modal con la imagen grande
+    function abrirModal(item) {
+      const modal = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage');
+      const modalDescription = document.getElementById('modalDescription');
+      const modalDate = document.getElementById('modalDate');
+      const modalLocation = document.getElementById('modalLocation');
+      
+      // Configurar contenido del modal
+      modalImage.src = item.url;
+      modalDescription.textContent = item.description;
+      
+      // Mostrar u ocultar fecha y ubicación según corresponda
+      if (item.date) {
+        modalDate.style.display = 'flex';
+        modalDate.querySelector('span').textContent = item.date;
+      } else {
+        modalDate.style.display = 'none';
+      }
+      
+      if (item.location) {
+        modalLocation.style.display = 'flex';
+        modalLocation.querySelector('span').textContent = item.location;
+      } else {
+        modalLocation.style.display = 'none';
+      }
+      
+      // Mostrar el modal con animación
+      modal.classList.add('active');
+      
+      // Deshabilitar scroll del body
+      document.body.style.overflow = 'hidden';
+    }
+    
+    // Función para cerrar el modal
+    function cerrarModal() {
+      const modal = document.getElementById('imageModal');
+      modal.classList.remove('active');
+      
+      // Habilitar scroll del body
+      document.body.style.overflow = '';
+    }
+    
+    // Función para mostrar notificaciones
+    function mostrarNotificacion(mensaje) {
+      // Crear elemento de notificación
+      const notification = document.createElement('div');
+      notification.style.position = 'fixed';
+      notification.style.bottom = '20px';
+      notification.style.right = '20px';
+      notification.style.backgroundColor = 'rgba(45, 51, 74, 0.95)';
+      notification.style.color = 'white';
+      notification.style.padding = '15px 25px';
+      notification.style.borderRadius = '10px';
+      notification.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
+      notification.style.zIndex = '9999';
+      notification.style.transform = 'translateY(20px)';
+      notification.style.opacity = '0';
+      notification.style.transition = 'all 0.3s ease';
+      notification.textContent = mensaje;
+      
+      // Añadir al DOM
+      document.body.appendChild(notification);
+      
+      // Aplicar animación de entrada
+      setTimeout(() => {
+        notification.style.transform = 'translateY(0)';
+        notification.style.opacity = '1';
+      }, 10);
+      
+      // Eliminar después de 3 segundos
+      setTimeout(() => {
+        notification.style.transform = 'translateY(20px)';
+        notification.style.opacity = '0';
+        
+        setTimeout(() => {
+          document.body.removeChild(notification);
+        }, 300);
+      }, 3000);
+    }
+    
+    // Event Listeners
+    
+    // Cerrar modal al hacer clic en el botón de cerrar
+    document.getElementById('modalClose').addEventListener('click', cerrarModal);
+    
+    // Cerrar modal al hacer clic fuera de la imagen
+    document.getElementById('imageModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        cerrarModal();
+      }
+    });
+    
+    // Eventos para los filtros y búsqueda
+    document.querySelectorAll('.sort-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        // Quitar clase active de todos los botones
+        document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+        
+        // Añadir clase active al botón clickeado
+        this.classList.add('active');
+        
+        // Recargar galería con nuevo filtro
+        cargarGaleria();
+      });
+    });
+    
+    // Evento para búsqueda
+    document.getElementById('searchInput').addEventListener('input', function() {
+      cargarGaleria();
+    });
+    
+    // Inicializar la página
+    window.addEventListener('load', function() {
+      createHearts(); // Crear corazones flotantes
+      cargarGaleria(); // Cargar galería inicial
+    });
   </script>
 </body>
 </html>
