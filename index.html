@@ -1,1 +1,164 @@
-hello world
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Galería de Recuerdos</title>
+  <!-- Fuente elegante: Playfair Display -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Playfair Display', serif;
+      background: #fafafa;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .upload-container {
+      max-width: 600px;
+      margin: 0 auto 30px auto;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 10px;
+    }
+    .upload-container input[type="file"],
+    .upload-container input[type="text"],
+    .upload-container button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 1em;
+    }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      overflow: hidden;
+      max-width: 300px;
+      text-align: center;
+    }
+    .card img {
+      width: 100%;
+      display: block;
+    }
+    .card p {
+      padding: 10px;
+      margin: 0;
+      font-size: 1.1em;
+    }
+  </style>
+</head>
+<body>
+  <h1>Galería de Recuerdos</h1>
+  <div class="upload-container">
+    <!-- Seleccionar imagen y escribir descripción -->
+    <input type="file" id="imageInput" accept="image/*">
+    <input type="text" id="descriptionInput" placeholder="Ej: 'En la playa con mi vida'">
+    <button id="uploadButton">Subir Imagen</button>
+  </div>
+  <div class="gallery" id="gallery"></div>
+
+  <!-- Usando Firebase vía CDN con módulos -->
+  <script type="module">
+    // Importa las funciones necesarias desde Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-analytics.js";
+    import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-storage.js";
+    import { getFirestore, collection, addDoc, serverTimestamp, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
+
+    // Configuración de Firebase (reemplaza con la tuya)
+    const firebaseConfig = {
+      apiKey: "AIzaSyBo9syn1q-HdylCyiDgd6tufD6LcrX0cek",
+      authDomain: "only-for-you-bby.firebaseapp.com",
+      projectId: "only-for-you-bby",
+      storageBucket: "only-for-you-bby.firebasestorage.app",
+      messagingSenderId: "566014686966",
+      appId: "1:566014686966:web:28eab757f6802ac4371ed7",
+      measurementId: "G-CHCNM92PYZ"
+    };
+
+    // Inicializa Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const storage = getStorage(app);
+    const db = getFirestore(app);
+
+    // Elementos del DOM
+    const imageInput = document.getElementById('imageInput');
+    const descriptionInput = document.getElementById('descriptionInput');
+    const uploadButton = document.getElementById('uploadButton');
+    const gallery = document.getElementById('gallery');
+
+    // Función para subir la imagen y guardar la info en Firestore
+    uploadButton.addEventListener('click', async () => {
+      const file = imageInput.files[0];
+      const description = descriptionInput.value.trim();
+
+      if (!file || !description) {
+        alert('Por favor, selecciona una imagen y escribe una descripción.');
+        return;
+      }
+
+      try {
+        // Genera un nombre único para el archivo
+        const timestamp = Date.now();
+        const fileName = `${timestamp}_${file.name}`;
+        const imgRef = storageRef(storage, 'images/' + fileName);
+
+        // Sube la imagen a Firebase Storage
+        const snapshot = await uploadBytes(imgRef, file);
+        const downloadURL = await getDownloadURL(snapshot.ref);
+
+        // Guarda la URL y la descripción en Firestore
+        await addDoc(collection(db, 'galeria'), {
+          imageURL: downloadURL,
+          description: description,
+          createdAt: serverTimestamp()
+        });
+
+        // Limpia los campos y recarga la galería
+        imageInput.value = "";
+        descriptionInput.value = "";
+        loadGallery();
+      } catch (error) {
+        console.error("Error al subir la imagen:", error);
+        alert("Hubo un error al subir la imagen.");
+      }
+    });
+
+    // Función para cargar la galería desde Firestore
+    async function loadGallery() {
+      gallery.innerHTML = "";
+      const q = query(collection(db, 'galeria'), orderBy('createdAt', 'desc'));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const card = document.createElement('div');
+        card.classList.add('card');
+
+        const img = document.createElement('img');
+        img.src = data.imageURL;
+        const desc = document.createElement('p');
+        desc.textContent = data.description;
+
+        card.appendChild(img);
+        card.appendChild(desc);
+        gallery.appendChild(card);
+      });
+    }
+
+    // Carga la galería cuando la página se inicia
+    loadGallery();
+  </script>
+</body>
+</html>
