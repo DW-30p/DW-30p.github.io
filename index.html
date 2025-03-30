@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Galería Multiusuario con Cloudinary y Firestore</title>
-  <!-- Fuente elegante para estilo -->
+  <title>Galería y Cartas Multiusuario</title>
+  <!-- Fuente elegante para la galería -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
   <style>
     body {
@@ -13,11 +13,10 @@
       padding: 20px;
       color: #333;
     }
-    h1 {
+    h1, h2 {
       text-align: center;
-      margin-bottom: 20px;
     }
-    .upload-container {
+    .upload-container, .letter-container {
       max-width: 600px;
       margin: 0 auto 30px auto;
       padding: 20px;
@@ -26,7 +25,7 @@
       border-radius: 10px;
       text-align: center;
     }
-    #upload_widget {
+    #upload_widget, #saveLetterButton {
       padding: 10px 20px;
       font-size: 1em;
       cursor: pointer;
@@ -36,7 +35,7 @@
       border-radius: 5px;
       transition: background-color 0.3s ease;
     }
-    #upload_widget:hover {
+    #upload_widget:hover, #saveLetterButton:hover {
       background-color: #0056b3;
     }
     #descriptionInput {
@@ -69,28 +68,52 @@
       margin: 0;
       font-size: 1.1em;
     }
+    /* Estilos para la sección de cartas */
+    #letterInput {
+      width: 100%;
+      height: 200px;
+      padding: 10px;
+      font-size: 1em;
+      font-family: "Baskerville Old Face", "Libre Baskerville", serif;
+      box-sizing: border-box;
+    }
+    #letterDisplay {
+      margin-top: 20px;
+      background: #fff;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: left;
+      font-family: "Baskerville Old Face", "Libre Baskerville", serif;
+      white-space: pre-wrap;
+    }
   </style>
 </head>
 <body>
   <h1>Galería de Recuerdos Multiusuario</h1>
   <div class="upload-container">
-    <!-- Botón para abrir el widget de Cloudinary -->
+    <!-- Sección para subir imágenes -->
     <button id="upload_widget">Subir Imagen con Cloudinary</button>
-    <!-- Input para la descripción de la imagen -->
     <input type="text" id="descriptionInput" placeholder="Ej: 'En la playa con mi vida'">
   </div>
-  <!-- Sección para mostrar las imágenes subidas -->
   <div class="gallery" id="gallery"></div>
 
-  <!-- Script del widget de Cloudinary -->
-  <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
-  <!-- Usamos módulos de Firebase vía CDN -->
-  <script type="module">
-    // Importa funciones necesarias de Firebase
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, query, orderBy, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
+  <h2>Cartas</h2>
+  <div class="letter-container">
+    <!-- Área para escribir la carta -->
+    <textarea id="letterInput" placeholder="Escribe tu carta aquí..."></textarea>
+    <button id="saveLetterButton">Guardar Carta</button>
+    <div id="letterDisplay"></div>
+  </div>
 
-    // Configuración de Firebase (reemplaza con tus datos reales)
+  <!-- Widget de Cloudinary -->
+  <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+  <!-- Importa Firebase mediante módulos desde CDN -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, query, orderBy, getDocs, serverTimestamp, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
+
+    // Configuración de Firebase (reemplaza con tus datos si es necesario)
     const firebaseConfig = {
       apiKey: "AIzaSyBo9syn1q-HdylCyiDgd6tufD6LcrX0cek",
       authDomain: "only-for-you-bby.firebaseapp.com",
@@ -101,15 +124,14 @@
       measurementId: "G-CHCNM92PYZ"
     };
 
-    // Inicializa Firebase y Firestore
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    // Datos de Cloudinary: usa tu Cloud name y upload preset
+    // Cloudinary: usa tu Cloud name y Upload Preset unsigned
     const cloudName = "dqdzng98y";
     const uploadPreset = "my_preset";
 
-    // Crea el widget de Cloudinary
+    // Widget de Cloudinary para subir imágenes
     var myWidget = cloudinary.createUploadWidget({
       cloudName: cloudName,
       uploadPreset: uploadPreset
@@ -118,17 +140,16 @@
         console.log("Imagen subida:", result.info);
         const imageUrl = result.info.secure_url;
         const description = document.getElementById("descriptionInput").value.trim();
-        // Guarda la imagen y descripción en Firestore
         guardarImagenFirestore(imageUrl, description);
       }
     });
 
-    // Abre el widget al hacer clic en el botón
+    // Abre el widget al hacer clic
     document.getElementById("upload_widget").addEventListener("click", function() {
       myWidget.open();
     }, false);
 
-    // Función para guardar la imagen y descripción en Firestore
+    // Guarda la imagen y descripción en Firestore (colección "galeria")
     async function guardarImagenFirestore(url, description) {
       try {
         await addDoc(collection(db, "galeria"), {
@@ -136,17 +157,16 @@
           description: description,
           createdAt: serverTimestamp()
         });
-        // Recarga la galería tras guardar
         cargarGaleria();
       } catch (error) {
         console.error("Error al guardar en Firestore:", error);
       }
     }
 
-    // Función para cargar la galería desde Firestore
+    // Carga la galería desde Firestore y muestra las imágenes
     async function cargarGaleria() {
       const gallery = document.getElementById("gallery");
-      gallery.innerHTML = ""; // Limpia la galería
+      gallery.innerHTML = "";
       try {
         const q = query(collection(db, "galeria"), orderBy("createdAt", "desc"));
         const querySnapshot = await getDocs(q);
@@ -170,8 +190,47 @@
       }
     }
 
-    // Carga la galería al cargar la página
-    window.addEventListener("load", cargarGaleria);
+    // Funciones para la sección de cartas
+    // Usaremos un documento único "cartaGeneral" en la colección "cartas"
+    const letterDocRef = doc(db, "cartas", "cartaGeneral");
+
+    // Carga la carta desde Firestore
+    async function loadLetter() {
+      try {
+        const docSnap = await getDoc(letterDocRef);
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          document.getElementById("letterInput").value = data.content || "";
+          document.getElementById("letterDisplay").textContent = data.content || "";
+        } else {
+          document.getElementById("letterDisplay").textContent = "No hay cartas guardadas.";
+        }
+      } catch (error) {
+        console.error("Error al cargar la carta:", error);
+      }
+    }
+
+    // Guarda o actualiza la carta en Firestore
+    async function saveLetter() {
+      const content = document.getElementById("letterInput").value;
+      try {
+        await setDoc(letterDocRef, {
+          content: content,
+          updatedAt: serverTimestamp()
+        });
+        loadLetter();
+      } catch (error) {
+        console.error("Error al guardar la carta:", error);
+      }
+    }
+
+    document.getElementById("saveLetterButton").addEventListener("click", saveLetter);
+
+    // Cargar la galería y la carta al cargar la página
+    window.addEventListener("load", () => {
+      cargarGaleria();
+      loadLetter();
+    });
   </script>
 </body>
 </html>
