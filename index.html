@@ -161,14 +161,41 @@
       z-index: 10;
       max-width: 800px;
       padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .hero-title {
       font-family: 'Playfair Display', serif;
       font-size: 2.8rem;
       color: white;
-      margin-bottom: 1rem;
+      margin-bottom: 2rem;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .hero-btn {
+      background-color: var(--secondary-color);
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    }
+
+    .hero-btn:hover {
+      background-color: #7d3c98;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     }
 
     /* Secciones principales */
@@ -296,7 +323,9 @@
       position: relative;
     }
 
-    input[type="text"], textarea {
+    input[type="text"], 
+    input[type="date"],
+    textarea {
       width: 100%;
       padding: 1rem;
       font-size: 1rem;
@@ -307,7 +336,9 @@
       font-family: 'Montserrat', sans-serif;
     }
 
-    input[type="text"]:focus, textarea:focus {
+    input[type="text"]:focus, 
+    input[type="date"]:focus,
+    textarea:focus {
       outline: none;
       border-color: var(--secondary-color);
       box-shadow: 0 0 0 3px rgba(142, 68, 173, 0.1);
@@ -362,7 +393,7 @@
     .gallery-img-container {
       position: relative;
       overflow: hidden;
-      padding-bottom: 75%; /* 4:3 Aspect Ratio */
+      padding-bottom: 100%; /* 1:1 Aspect Ratio */
     }
 
     .gallery-card img {
@@ -380,16 +411,21 @@
     }
 
     .gallery-content {
-      padding: 1.5rem;
+      padding: 1.2rem;
       flex-grow: 1;
       display: flex;
       flex-direction: column;
     }
 
+    .gallery-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
     .gallery-date, .gallery-location {
       font-size: 0.85rem;
       color: #777;
-      margin-bottom: 0.5rem;
       display: flex;
       align-items: center;
       gap: 5px;
@@ -400,12 +436,15 @@
       color: var(--secondary-color);
     }
 
-    .gallery-description {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-      line-height: 1.4;
-      flex-grow: 1;
+    .gallery-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+
+    .gallery-btn {
+      font-size: 0.9rem;
+      padding: 0.5rem 1rem;
     }
 
     .gallery-editable:hover {
@@ -420,17 +459,6 @@
       padding: 2px 5px;
       margin: -2px -5px;
       border-radius: 4px;
-    }
-
-    .gallery-actions {
-      display: flex;
-      justify-content: space-between;
-      margin-top: auto;
-    }
-
-    .gallery-btn {
-      font-size: 0.9rem;
-      padding: 0.5rem 1rem;
     }
 
     /* Letter Section */
@@ -551,162 +579,7 @@
       justify-content: space-between;
     }
 
-    /* Letter Display Full */
-    .letter-display-container {
-      margin-top: 3rem;
-      padding: 2rem;
-      background-color: white;
-      border-radius: 12px;
-      box-shadow: var(--shadow-medium);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .letter-display-container::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url('https://img.freepik.com/free-photo/white-paper-texture_1194-5998.jpg?w=1000');
-      background-size: cover;
-      opacity: 0.08;
-      pointer-events: none;
-    }
-
-    .letter-display-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.5rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid #eee;
-    }
-
-    .letter-display-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--primary-color);
-    }
-
-    .letter-display-date {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.9rem;
-      color: #777;
-    }
-
-    .letter-display-content {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.2rem;
-      line-height: 1.8;
-      white-space: pre-wrap;
-      position: relative;
-      z-index: 10;
-      color: #333;
-      text-align: justify;
-      padding: 0 1rem;
-    }
-
-    .letter-signature {
-      text-align: right;
-      margin-top: 2rem;
-      font-family: 'Dancing Script', cursive;
-      font-size: 1.8rem;
-      color: var(--primary-color);
-    }
-
-    .decorative-line {
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(to right, transparent, var(--secondary-color), transparent);
-      margin: 2rem 0;
-    }
-
-    /* Animaciones */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .fade-in-up {
-      animation: fadeInUp 0.6s ease-out forwards;
-    }
-
-    /* Estados de carga */
-    .loading {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 2rem;
-    }
-
-    .loading-spinner {
-      width: 50px;
-      height: 50px;
-      border: 5px solid rgba(142, 68, 173, 0.3);
-      border-radius: 50%;
-      border-top-color: var(--secondary-color);
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    /* Notificaciones */
-    .notification {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background-color: var(--primary-color);
-      color: white;
-      padding: 1rem;
-      border-radius: 8px;
-      box-shadow: var(--shadow-medium);
-      z-index: 1000;
-      transform: translateX(150%);
-      transition: transform 0.3s ease;
-    }
-
-    .notification.show {
-      transform: translateX(0);
-    }
-
-    .notification-success {
-      background-color: #27ae60;
-    }
-
-    .notification-error {
-      background-color: #e74c3c;
-    }
-
-    /* Visor de imágenes */
-    .image-viewer-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.9);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    /* Modal carta completa */
+    /* Letter Modal */
     .letter-modal {
       position: fixed;
       top: 0;
@@ -797,6 +670,88 @@
       color: var(--primary-color);
     }
 
+    /* Visor de imágenes */
+    .image-viewer-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    /* Animaciones */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in-up {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    /* Estados de carga */
+    .loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid rgba(142, 68, 173, 0.3);
+      border-radius: 50%;
+      border-top-color: var(--secondary-color);
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Notificaciones */
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: var(--shadow-medium);
+      z-index: 1000;
+      transform: translateX(150%);
+      transition: transform 0.3s ease;
+    }
+
+    .notification.show {
+      transform: translateX(0);
+    }
+
+    .notification-success {
+      background-color: #27ae60;
+    }
+
+    .notification-error {
+      background-color: #e74c3c;
+    }
+
     /* Footer */
     footer {
       background-color: var(--dark-color);
@@ -865,6 +820,32 @@
     .heart-icon {
       color: var(--accent-color);
       margin: 0 5px;
+    }
+
+    /* Placeholder para estado vacío */
+    .empty-state {
+      text-align: center;
+      padding: 3rem 2rem;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .empty-state i {
+      font-size: 3rem;
+      color: #ddd;
+      margin-bottom: 1rem;
+    }
+
+    .empty-state h3 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    .empty-state p {
+      color: #777;
+      margin-bottom: 1.5rem;
     }
 
     /* Responsive */
@@ -960,37 +941,11 @@
         width: 100%;
       }
     }
-
-    /* Placeholder para estado vacío */
-    .empty-state {
-      text-align: center;
-      padding: 3rem 2rem;
-      background-color: white;
-      border-radius: 12px;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .empty-state i {
-      font-size: 3rem;
-      color: #ddd;
-      margin-bottom: 1rem;
-    }
-
-    .empty-state h3 {
-      font-family: 'Playfair Display', serif;
-      margin-bottom: 0.5rem;
-      color: var(--primary-color);
-    }
-
-    .empty-state p {
-      color: #777;
-      margin-bottom: 1.5rem;
-    }
   </style>
 </head>
 <body>
   <!-- Header / Navegación -->
-<header>
+  <header>
     <nav>
       <div class="logo">
         <i class="fas fa-heart"></i>
@@ -1005,16 +960,18 @@
       </button>
     </nav>
   </header>
-  
+
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-overlay"></div>
     <div class="hero-content" data-aos="fade-up">
       <h1 class="hero-title">Nuestros Momentos Juntos</h1>
-      <a href="#galeria" class="hero-btn">Explorar Galería</a>
+      <button id="heroUploadBtn" class="hero-btn">
+        <i class="fas fa-plus"></i> Añadir un nuevo recuerdo
+      </button>
     </div>
   </section>
-  
+
   <!-- Main Content -->
   <main>
     <!-- Galería Section -->
@@ -1024,29 +981,7 @@
         <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
           Captura y comparte tus momentos especiales con fotos que cuentan nuestra historia.
         </p>
-  
-        <!-- Upload Container -->
-        <div class="card-container upload-container" data-aos="fade-up" data-aos-delay="200">
-          <h3 class="upload-title">Añadir un Nuevo Recuerdo</h3>
-          <div class="upload-form">
-            <button id="upload_widget" class="btn btn-primary">
-              <i class="fas fa-cloud-upload-alt"></i> Subir Imagen
-            </button>
-            <div class="input-group">
-              <input type="text" id="descriptionInput" placeholder=" ">
-              <label for="descriptionInput">Describe este momento especial...</label>
-            </div>
-            <div class="input-group">
-              <input type="text" id="locationInput" placeholder=" ">
-              <label for="locationInput">Lugar (opcional)</label>
-            </div>
-            <div class="input-group">
-              <input type="date" id="dateInput" placeholder=" ">
-              <label for="dateInput" style="transform: translateY(-1.5rem); font-size: 0.8rem; background: white;">Fecha (opcional)</label>
-            </div>
-          </div>
-        </div>
-  
+
         <!-- Image Gallery -->
         <div id="galleryLoading" class="loading">
           <div class="loading-spinner"></div>
@@ -1056,44 +991,43 @@
         </div>
       </div>
     </section>
-  
+
     <!-- Cartas Section -->
-    <section id="cartas" class="section">
-      <div class="container">
-        <h2 class="section-title" data-aos="fade-up">Nuestras Cartas</h2>
-        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
-          Expresa tus sentimientos con palabras quiero que perduren en el tiempo y venir aqui a leerlas.
-        </p>
+<section id="cartas" class="section">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Nuestras Cartas</h2>
+      <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+        Expresa tus sentimientos con palabras quiero que perduren en el tiempo y venir aqui a leerlas.
+      </p>
   
-        <!-- Letter Editor -->
-        <div class="card-container letter-container" data-aos="fade-up" data-aos-delay="200">
-          <div class="stationary-bg"></div>
-          <h3 class="letter-title">Escribe una Carta</h3>
-          <div class="letter-form">
-            <div class="letter-editor">
-              <textarea id="letterInput" placeholder="escribe algo tontita ❤️"></textarea>
-              <div class="letter-actions">
-                <button id="saveLetterButton" class="btn btn-secondary">
-                  <i class="fas fa-save"></i> Guardar Carta
-                </button>
-                <button id="clearLetterButton" class="btn btn-accent">
-                  <i class="fas fa-trash"></i> Limpiar
-                </button>
-              </div>
+      <!-- Letter Editor -->
+      <div class="card-container letter-container" data-aos="fade-up" data-aos-delay="200">
+        <div class="stationary-bg"></div>
+        <h3 class="letter-title">Escribe una Carta</h3>
+        <div class="letter-form">
+          <div class="letter-editor">
+            <textarea id="letterInput" placeholder="escribe algo tontita ❤️"></textarea>
+            <div class="letter-actions">
+              <button id="saveLetterButton" class="btn btn-secondary">
+                <i class="fas fa-save"></i> Guardar Carta
+              </button>
+              <button id="clearLetterButton" class="btn btn-accent">
+                <i class="fas fa-trash"></i> Limpiar
+              </button>
             </div>
           </div>
         </div>
-  
-        <!-- Letter Cards -->
-        <div id="letterCardsLoading" class="loading">
-          <div class="loading-spinner"></div>
-        </div>
-        <div class="letter-cards" id="letterCards">
-          <!-- Las tarjetas de cartas se generarán dinámicamente aquí -->
-        </div>
       </div>
-    </section>
-  </main>
+  
+      <!-- Letter Cards -->
+      <div id="letterCardsLoading" class="loading">
+        <div class="loading-spinner"></div>
+      </div>
+      <div class="letter-cards" id="letterCards">
+        <!-- Las tarjetas de cartas se generarán dinámicamente aquí -->
+      </div>
+    </div>
+  </section>
   
   <!-- Letter Modal (para ver carta completa) -->
   <div id="letterModal" class="letter-modal">
@@ -1251,42 +1185,39 @@
         
         // Obtener datos de la imagen
         const imageUrl = result.info.secure_url;
-        const description = document.getElementById("descriptionInput").value.trim();
-        const location = document.getElementById("locationInput").value.trim();
-        const customDate = document.getElementById("dateInput").value;
+        const location = prompt("¿Dónde se tomó esta foto? (opcional)");
+        const customDate = prompt("¿Cuándo se tomó esta foto? (DD/MM/YYYY) (opcional)");
         
         // Guardar en Firestore
-        guardarImagenFirestore(imageUrl, description, location, customDate);
+        guardarImagenFirestore(imageUrl, location, customDate);
       }
     });
   
-    // Abrir widget de Cloudinary
-    document.getElementById("upload_widget").addEventListener("click", function() {
+    // Botón de hero para abrir widget de Cloudinary
+    document.getElementById("heroUploadBtn").addEventListener("click", function() {
       myWidget.open();
     });
   
-    // Guardar imagen en Firestore
-    async function guardarImagenFirestore(url, description, location = "", customDate = "") {
+    // Guardar imagen en Firestore (versión minimalista)
+    async function guardarImagenFirestore(url, location = "", customDate = "") {
       try {
         // Datos para guardar
         const imageData = {
           imageURL: url,
-          description: description || "Sin descripción",
-          location: location || "",
           createdAt: serverTimestamp()
         };
         
-        // Si hay una fecha personalizada, se agrega al objeto
-        if (customDate) {
-          imageData.customDate = customDate;
+        // Añadir ubicación si está presente
+        if (location && location.trim() !== "") {
+          imageData.location = location.trim();
+        }
+        
+        // Añadir fecha personalizada si está presente
+        if (customDate && customDate.trim() !== "") {
+          imageData.customDate = customDate.trim();
         }
         
         await addDoc(collection(db, "galeria"), imageData);
-        
-        // Limpiar inputs
-        document.getElementById("descriptionInput").value = "";
-        document.getElementById("locationInput").value = "";
-        document.getElementById("dateInput").value = "";
         
         // Recargar galería
         cargarGaleria();
@@ -1340,12 +1271,7 @@
           
           // Priorizar la fecha personalizada si existe
           if (data.customDate) {
-            const customDate = new Date(data.customDate);
-            formattedDate = new Intl.DateTimeFormat('es-ES', {
-              day: '2-digit',
-              month: 'long',
-              year: 'numeric'
-            }).format(customDate);
+            formattedDate = data.customDate;
           } else if (data.createdAt) {
             const date = data.createdAt.toDate();
             formattedDate = new Intl.DateTimeFormat('es-ES', {
@@ -1353,45 +1279,42 @@
               month: 'long',
               year: 'numeric'
             }).format(date);
-          } else {
-            formattedDate = "Fecha no disponible";
           }
           
-          // HTML de la tarjeta
+          // HTML de la tarjeta (diseño minimalista)
           card.innerHTML = `
             <div class="gallery-img-container">
-              <img src="${data.imageURL}" alt="${data.description}" loading="lazy">
+              <img src="${data.imageURL}" alt="Recuerdo" loading="lazy">
             </div>
             <div class="gallery-content">
-              <div class="gallery-date gallery-editable" 
-                  contenteditable="true" 
-                  data-doc-id="${doc.id}" 
-                  data-field="customDate"
-                  data-original-text="${formattedDate}"
-                  onfocus="this.setAttribute('data-original-text', this.textContent.trim())"
-                  onblur="updateImageField(this)">
-                <i class="fas fa-calendar"></i> ${formattedDate}
+              <div class="gallery-meta">
+                ${formattedDate ? `
+                  <div class="gallery-date gallery-editable" 
+                      contenteditable="true" 
+                      data-doc-id="${doc.id}" 
+                      data-field="customDate"
+                      data-original-text="${formattedDate}"
+                      onfocus="this.setAttribute('data-original-text', this.textContent.trim())"
+                      onblur="updateImageField(this)">
+                    <i class="fas fa-calendar"></i> ${formattedDate}
+                  </div>
+                ` : ''}
+                
+                ${data.location ? `
+                  <div class="gallery-location gallery-editable" 
+                      contenteditable="true" 
+                      data-doc-id="${doc.id}" 
+                      data-field="location"
+                      data-original-text="${data.location}"
+                      onfocus="this.setAttribute('data-original-text', this.textContent.trim())"
+                      onblur="updateImageField(this)">
+                    <i class="fas fa-map-marker-alt"></i> ${data.location}
+                  </div>
+                ` : ''}
               </div>
               
-              <div class="gallery-location gallery-editable" 
-                  contenteditable="true" 
-                  data-doc-id="${doc.id}" 
-                  data-field="location"
-                  data-original-text="${data.location || 'Agregar ubicación...'}"
-                  onfocus="this.setAttribute('data-original-text', this.textContent.trim())"
-                  onblur="updateImageField(this)">
-                <i class="fas fa-map-marker-alt"></i> ${data.location || 'Agregar ubicación...'}
-              </div>
-              
-              <p class="gallery-description gallery-editable" 
-                 contenteditable="true" 
-                 data-doc-id="${doc.id}" 
-                 data-field="description"
-                 data-original-text="${data.description}"
-                 onfocus="this.setAttribute('data-original-text', this.textContent.trim())"
-                 onblur="updateImageField(this)">${data.description}</p>
               <div class="gallery-actions">
-                <button class="btn btn-primary gallery-btn view-image-btn" data-img="${data.imageURL}" data-desc="${data.description}">
+                <button class="btn btn-primary gallery-btn view-image-btn" data-img="${data.imageURL}">
                   <i class="fas fa-eye"></i> Ver
                 </button>
                 <button class="btn btn-accent gallery-btn delete-image-btn" data-doc-id="${doc.id}">
@@ -1415,8 +1338,7 @@
         document.querySelectorAll('.view-image-btn').forEach(btn => {
           btn.addEventListener('click', function() {
             const imgUrl = this.getAttribute('data-img');
-            const imgDesc = this.getAttribute('data-desc');
-            abrirVisorImagen(imgUrl, imgDesc);
+            abrirVisorImagen(imgUrl);
           });
         });
         
@@ -1431,7 +1353,7 @@
       }
     }
     
-    // Función global para actualizar cualquier campo de la imagen
+    // Función global para actualizar campos de la imagen
     window.updateImageField = async function(element) {
       const docId = element.getAttribute('data-doc-id');
       const field = element.getAttribute('data-field');
@@ -1440,38 +1362,24 @@
       
       // Eliminar el icono del texto
       if (field === 'location') {
-        newText = newText.replace('Agregar ubicación...', '').replace(/^\s*\u{f3c5}\s*/u, '').trim();
+        newText = newText.replace(/^\s*\u{f3c5}\s*/u, '').trim();
       } else if (field === 'customDate') {
         newText = newText.replace(/^\s*\u{f133}\s*/u, '').trim();
       }
       
-      // Solo actualizar si cambió el texto y no está vacío (excepto para ubicación)
-      if (newText !== originalText && (newText !== '' || field === 'location')) {
+      // Solo actualizar si cambió el texto
+      if (newText !== originalText) {
         try {
           const docRef = doc(db, "galeria", docId);
           const updateData = {};
-          
-          // Para fechas, intentamos convertir a formato fecha
-          if (field === 'customDate') {
-            try {
-              // Intentar guardar como string por ahora
-              updateData[field] = newText;
-            } catch (e) {
-              console.error("Error al convertir fecha:", e);
-              element.textContent = originalText;
-              showNotification("Formato de fecha inválido", "error");
-              return;
-            }
-          } else {
-            updateData[field] = newText;
-          }
+          updateData[field] = newText;
           
           await updateDoc(docRef, updateData);
           showNotification("Información actualizada", "success");
           
-          // Actualizar el elemento con icon
+          // Actualizar el elemento con icono
           if (field === 'location') {
-            element.innerHTML = `<i class="fas fa-map-marker-alt"></i> ${newText || 'Agregar ubicación...'}`;
+            element.innerHTML = `<i class="fas fa-map-marker-alt"></i> ${newText}`;
           } else if (field === 'customDate') {
             element.innerHTML = `<i class="fas fa-calendar"></i> ${newText}`;
           }
@@ -1482,18 +1390,9 @@
             element.innerHTML = `<i class="fas fa-map-marker-alt"></i> ${originalText}`;
           } else if (field === 'customDate') {
             element.innerHTML = `<i class="fas fa-calendar"></i> ${originalText}`;
-          } else {
-            element.textContent = originalText;
           }
           showNotification(`Error al actualizar ${field}`, "error");
         }
-      } else if (newText === '' && field !== 'location') {
-        if (field === 'customDate') {
-          element.innerHTML = `<i class="fas fa-calendar"></i> ${originalText}`;
-        } else {
-          element.textContent = originalText;
-        }
-        showNotification("El campo no puede estar vacío", "error");
       }
     };
     
@@ -1517,7 +1416,7 @@
     }
     
     // Abrir visor de imagen
-    function abrirVisorImagen(imgUrl, imgDesc) {
+    function abrirVisorImagen(imgUrl) {
       // Crear modal para ver la imagen
       const modal = document.createElement('div');
       modal.className = 'image-viewer-modal';
@@ -1536,14 +1435,11 @@
       
       modal.innerHTML = `
         <div style="position: relative; max-width: 90%; max-height: 90%;">
-          <img src="${imgUrl}" alt="${imgDesc}" style="max-width: 100%; max-height: 85vh; border-radius: 5px;">
+          <img src="${imgUrl}" alt="Recuerdo" style="max-width: 100%; max-height: 85vh; border-radius: 5px;">
           <div style="position: absolute; top: 15px; right: 15px;">
             <button class="close-viewer-btn" style="background: rgba(0,0,0,0.6); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 20px;">
               <i class="fas fa-times"></i>
             </button>
-          </div>
-          <div style="background: rgba(255,255,255,0.9); padding: 15px; border-radius: 0 0 5px 5px; margin-top: 5px;">
-            <p style="margin: 0; font-size: 1.1rem;">${imgDesc}</p>
           </div>
         </div>
       `;
@@ -1734,62 +1630,62 @@
     }
     
     // Eliminar carta
-async function eliminarCarta(letterId) {
-    try {
-      await deleteDoc(doc(db, "cartas", letterId));
-      cargarCartas();
-      showNotification("Carta eliminada correctamente");
-    } catch (error) {
-      console.error("Error al eliminar la carta:", error);
-      showNotification("Error al eliminar la carta", "error");
+    async function eliminarCarta(letterId) {
+      try {
+        await deleteDoc(doc(db, "cartas", letterId));
+        cargarCartas();
+        showNotification("Carta eliminada correctamente");
+      } catch (error) {
+        console.error("Error al eliminar la carta:", error);
+        showNotification("Error al eliminar la carta", "error");
+      }
     }
-  }
   
-  // Cerrar modal de carta
-  document.getElementById("letterModalClose").addEventListener("click", () => {
-    closeLetterModal();
-  });
-  
-  // También cerrar al hacer clic fuera del contenido
-  document.getElementById("letterModal").addEventListener("click", (e) => {
-    if (e.target === document.getElementById("letterModal")) {
+    // Cerrar modal de carta
+    document.getElementById("letterModalClose").addEventListener("click", () => {
       closeLetterModal();
+    });
+  
+    // También cerrar al hacer clic fuera del contenido
+    document.getElementById("letterModal").addEventListener("click", (e) => {
+      if (e.target === document.getElementById("letterModal")) {
+        closeLetterModal();
+      }
+    });
+  
+    // Función para cerrar el modal de carta
+    function closeLetterModal() {
+      const modal = document.getElementById("letterModal");
+      modal.classList.remove("show");
+      document.body.style.overflow = "";
     }
-  });
   
-  // Función para cerrar el modal de carta
-  function closeLetterModal() {
-    const modal = document.getElementById("letterModal");
-    modal.classList.remove("show");
-    document.body.style.overflow = "";
-  }
+    // Limpiar carta
+    document.getElementById("clearLetterButton").addEventListener("click", function() {
+      if (confirm("¿Estás seguro de que quieres limpiar el contenido de la carta?")) {
+        document.getElementById("letterInput").value = "";
+      }
+    });
   
-  // Limpiar carta
-  document.getElementById("clearLetterButton").addEventListener("click", function() {
-    if (confirm("¿Estás seguro de que quieres limpiar el contenido de la carta?")) {
-      document.getElementById("letterInput").value = "";
-    }
-  });
+    // Event listener para guardar nueva carta
+    document.getElementById("saveLetterButton").addEventListener("click", saveNewLetter);
   
-  // Event listener para guardar nueva carta
-  document.getElementById("saveLetterButton").addEventListener("click", saveNewLetter);
+    // Inicializar la página
+    window.addEventListener("load", () => {
+      cargarGaleria();
+      cargarCartas();
+    });
   
-  // Inicializar la página
-  window.addEventListener("load", () => {
-    cargarGaleria();
-    cargarCartas();
-  });
-  
-  // Smooth scroll para links de navegación
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      
-      document.querySelector(this.getAttribute('href')).scrollIntoView({
-        behavior: 'smooth'
+    // Smooth scroll para links de navegación
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
       });
     });
-  });
   </script>
   </body>
   </html>
