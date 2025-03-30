@@ -134,70 +134,34 @@
     }
 
     /* Hero section */
-    .hero {
-      height: 70vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      background: url('https://images.unsplash.com/photo-1568667176633-118c95d55d86?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
-      background-attachment: fixed;
-    }
-
-    .hero-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 100%);
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 10;
-      max-width: 800px;
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .hero-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.8rem;
-      color: white;
-      margin-bottom: 2rem;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    }
-
-    .hero-btn {
-      background-color: var(--secondary-color);
-      color: white;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1rem;
-      font-weight: 500;
-      padding: 0.8rem 2rem;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: var(--transition);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-    }
-
-    .hero-btn:hover {
-      background-color: #7d3c98;
-      transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    }
-
+.hero {
+    background: linear-gradient(to right, #4e54c8, #8f94fb); /* Fondo con gradiente colorido en lugar de imagen */
+    background-attachment: fixed;
+  }
+  
+  .hero-overlay {
+    background: linear-gradient(45deg, rgba(255,99,132,0.3), rgba(142,68,173,0.3), rgba(41,128,185,0.3)); /* Overlay colorido semitransparente */
+  }
+  
+  .hero-title {
+    color: white;
+    text-shadow: 2px 2px 0 #8e44ad, 4px 4px 0 rgba(231, 76, 60, 0.7); /* Sombra de texto colorida */
+    font-weight: 700;
+  }
+  
+  .hero-btn {
+    background: linear-gradient(to right, #ff6b6b, #8e44ad); /* Gradiente para el botón */
+    border: none;
+    color: white;
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+    transition: all 0.3s ease;
+  }
+  
+  .hero-btn:hover {
+    background: linear-gradient(to right, #ff5252, #7d3c98);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(255, 107, 107, 0.5);
+  }
     /* Secciones principales */
     .section {
       padding: 4rem 0;
