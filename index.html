@@ -1273,7 +1273,7 @@
       loadingElement.style.display = "flex";
       
       try {
-        const q = query(collection(db, "galeria"), orderBy("createdAt", "desc"));
+        const q = query(collection(db, "galeria"), orderBy("createdAt", "asc"));
         const querySnapshot = await getDocs(q);
         
         // Ocultar carga
