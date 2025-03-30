@@ -32,12 +32,13 @@
       box-sizing: border-box;
     }
 
+        /* Cambia el fondo de body */
     body {
-      font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-      color: var(--dark-color);
-      min-height: 100vh;
-      line-height: 1.6;
+        font-family: 'Montserrat', sans-serif;
+        background: linear-gradient(135deg, #e8e1f8, #d5d9fc); /* Versión más clara de los tonos lila azulados */
+        color: var(--dark-color);
+        min-height: 100vh;
+        line-height: 1.6;
     }
 
     .container {
@@ -134,13 +135,28 @@
     }
 
     /* Hero section */
+/* Reemplaza la sección del hero */
 .hero {
-    background: linear-gradient(to right, #4e54c8, #8f94fb); /* Fondo con gradiente colorido en lugar de imagen */
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ccb3f7, #969df4); /* Estos son los colores lila azulados que mencionaste */
     background-attachment: fixed;
   }
   
+  /* Ajusta el overlay para que sea más sutil */
   .hero-overlay {
-    background: linear-gradient(45deg, rgba(255,99,132,0.3), rgba(142,68,173,0.3), rgba(41,128,185,0.3)); /* Overlay colorido semitransparente */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 100%);
   }
   
   .hero-title {
@@ -149,18 +165,44 @@
     font-weight: 700;
   }
   
+    /* Ajusta el estilo del botón */
+    .hero-btn {
+        background-color: var(--secondary-color);
+        color: white;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1rem; /* Ligeramente más grande que el original */
+        font-weight: 600;
+        padding: 0.7rem 2rem; /* Un poco más grande que el original */
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: var(--transition);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.2); /* Sombra un poco más visible */
+    }
+    
+    .hero-btn:hover {
+        background-color: #7d3c98;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+  
+  /* Añade un efecto de pulsación para hacerlo más llamativo */
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  
   .hero-btn {
-    background: linear-gradient(to right, #ff6b6b, #8e44ad); /* Gradiente para el botón */
-    border: none;
-    color: white;
-    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
-    transition: all 0.3s ease;
+    animation: pulse 2s infinite;
   }
   
   .hero-btn:hover {
-    background: linear-gradient(to right, #ff5252, #7d3c98);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(255, 107, 107, 0.5);
+    animation: none; /* Detener la animación al pasar el mouse */
   }
     /* Secciones principales */
     .section {
