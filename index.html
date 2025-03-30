@@ -49,14 +49,41 @@
     }
 
     /* Header y navegación */
+    /* Añade estas propiedades al header */
     header {
-      background-color: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(10px);
-      box-shadow: var(--shadow-soft);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      padding: 1rem 0;
+        background-color: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        box-shadow: var(--shadow-soft);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        padding: 1rem 0;
+        transition: all 0.3s ease; /* Para suavizar la transición */
+    }
+    
+    /* Añade esta nueva clase para cuando se hace scroll */
+    header.shrink {
+        padding: 0.5rem 0; /* Reduce el padding vertical */
+    }
+    
+    /* Modifica el logo para que también cambie de tamaño */
+    .logo {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: var(--primary-color);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.3s ease; /* Para suavizar la transición */
+    }
+    
+    header.shrink .logo {
+        font-size: 1.3rem; /* Logo más pequeño cuando se hace scroll */
+    }
+    
+    header.shrink .logo i {
+        font-size: 0.9em; /* Icono proporcionalmente más pequeño */
     }
 
     nav {
@@ -1693,7 +1720,7 @@
       });
     });
   </script>
-  
+
   <script>
     // Función para reducir el tamaño del header al hacer scroll
     window.addEventListener('scroll', function() {
