@@ -2,118 +2,1069 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Galería y Cartas Multiusuario</title>
-  <!-- Fuente elegante para la galería -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Momentos & Sentimientos</title>
+  <!-- Fuentes de Google -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome para iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- AOS para animaciones de scroll -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
   <style>
-    body {
-      font-family: 'Playfair Display', serif;
-      background: #fafafa;
+    /* Variables de colores y estilos */
+    :root {
+      --primary-color: #34495e;
+      --secondary-color: #8e44ad;
+      --accent-color: #e74c3c;
+      --dark-color: #2c3e50;
+      --light-color: #ecf0f1;
+      --gold-color: #f39c12;
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      --shadow-soft: 0 3px 6px rgba(0,0,0,0.1), 0 3px 6px rgba(0,0,0,0.15);
+      --shadow-medium: 0 10px 20px rgba(0,0,0,0.1), 0 6px 6px rgba(0,0,0,0.1);
+      --shadow-hard: 0 14px 28px rgba(0,0,0,0.2), 0 10px 10px rgba(0,0,0,0.15);
+    }
+
+    /* Estilos base */
+    * {
       margin: 0;
-      padding: 20px;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      color: var(--dark-color);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 0;
+    }
+
+    /* Header y navegación */
+    header {
+      background-color: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow-soft);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 1rem 0;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo i {
+      color: var(--accent-color);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: var(--dark-color);
+      font-weight: 500;
+      font-size: 1rem;
+      position: relative;
+      padding: 0.5rem 0;
+      transition: var(--transition);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--secondary-color);
+      transition: var(--transition);
+    }
+
+    .nav-link:hover {
+      color: var(--secondary-color);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link.active {
+      color: var(--secondary-color);
+    }
+
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    /* Botón de menú móvil */
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      color: var(--dark-color);
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Hero section */
+    .hero {
+      height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background: url('https://images.unsplash.com/photo-1568667176633-118c95d55d86?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
+      background-attachment: fixed;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 800px;
+      padding: 2rem;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      color: white;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .hero-subtitle {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2rem;
+      color: var(--light-color);
+      margin-bottom: 2rem;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+
+    .hero-btn {
+      background-color: var(--secondary-color);
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .hero-btn:hover {
+      background-color: #7d3c98;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    /* Secciones principales */
+    .section {
+      padding: 4rem 0;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: var(--secondary-color);
+      margin: 0.5rem auto;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: 1.1rem;
+      margin-bottom: 3rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #555;
+    }
+
+    /* Upload Container */
+    .card-container {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      box-shadow: var(--shadow-medium);
+      padding: 2rem;
+      margin-bottom: 3rem;
+      transition: var(--transition);
+    }
+
+    .card-container:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hard);
+    }
+
+    .upload-container, .letter-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .upload-title, .letter-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      color: var(--primary-color);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    /* Botones */
+    .btn {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #2c3e50;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(44, 62, 80, 0.3);
+    }
+
+    .btn-secondary {
+      background-color: var(--secondary-color);
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background-color: #7d3c98;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(142, 68, 173, 0.3);
+    }
+
+    .btn-accent {
+      background-color: var(--accent-color);
+      color: white;
+    }
+
+    .btn-accent:hover {
+      background-color: #c0392b;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+    }
+
+    /* Upload form */
+    .upload-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .input-group {
+      position: relative;
+    }
+
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      transition: var(--transition);
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    input[type="text"]:focus, textarea:focus {
+      outline: none;
+      border-color: var(--secondary-color);
+      box-shadow: 0 0 0 3px rgba(142, 68, 173, 0.1);
+      background-color: white;
+    }
+
+    .input-group label {
+      position: absolute;
+      left: 1rem;
+      top: 1rem;
+      padding: 0 0.25rem;
+      background-color: #f9f9f9;
+      color: #777;
+      font-size: 1rem;
+      transition: var(--transition);
+      pointer-events: none;
+    }
+
+    .input-group input:focus ~ label,
+    .input-group input:not(:placeholder-shown) ~ label {
+      top: -0.5rem;
+      left: 0.8rem;
+      font-size: 0.8rem;
+      color: var(--secondary-color);
+      background-color: white;
+    }
+
+    /* Gallery */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .gallery-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: var(--transition);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .gallery-card:hover {
+      transform: translateY(-10px) rotate(1deg);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .gallery-img-container {
+      position: relative;
+      overflow: hidden;
+      padding-bottom: 75%; /* 4:3 Aspect Ratio */
+    }
+
+    .gallery-card img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .gallery-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .gallery-content {
+      padding: 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .gallery-date {
+      font-size: 0.85rem;
+      color: #777;
+      margin-bottom: 0.5rem;
+    }
+
+    .gallery-description {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+      flex-grow: 1;
+    }
+
+    .gallery-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+
+    .gallery-btn {
+      font-size: 0.9rem;
+      padding: 0.5rem 1rem;
+    }
+
+    /* Letter Section */
+    .letter-container {
+      position: relative;
+    }
+
+    .stationary-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://img.freepik.com/free-photo/white-paper-texture_1194-5998.jpg?w=1000');
+      background-size: cover;
+      opacity: 0.1;
+      pointer-events: none;
+      border-radius: 15px;
+    }
+
+    .letter-form {
+      position: relative;
+      z-index: 10;
+    }
+
+    .letter-editor {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    #letterInput {
+      min-height: 250px;
+      padding: 1.5rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      line-height: 1.6;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: rgba(255, 255, 255, 0.9);
+      resize: vertical;
       color: #333;
     }
-    h1, h2 {
-      text-align: center;
+
+    #letterInput:focus {
+      outline: none;
+      border-color: var(--secondary-color);
+      box-shadow: 0 0 0 3px rgba(142, 68, 173, 0.1);
     }
-    .upload-container, .letter-container {
-      max-width: 600px;
-      margin: 0 auto 30px auto;
-      padding: 20px;
-      background: #fff;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      border-radius: 10px;
-      text-align: center;
-    }
-    #upload_widget, #saveLetterButton {
-      padding: 10px 20px;
-      font-size: 1em;
-      cursor: pointer;
-      background-color: #007BFF;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-    }
-    #upload_widget:hover, #saveLetterButton:hover {
-      background-color: #0056b3;
-    }
-    #descriptionInput {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      font-size: 1em;
-      box-sizing: border-box;
-    }
-    .gallery {
+
+    .letter-actions {
       display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
+      justify-content: space-between;
+      gap: 1rem;
     }
-    .card {
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+    /* Letter Display */
+    .letter-display-container {
+      margin-top: 3rem;
+      padding: 2rem;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: var(--shadow-medium);
+      position: relative;
       overflow: hidden;
-      max-width: 300px;
-      text-align: center;
     }
-    .card img {
+
+    .letter-display-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      display: block;
+      height: 100%;
+      background-image: url('https://img.freepik.com/free-photo/white-paper-texture_1194-5998.jpg?w=1000');
+      background-size: cover;
+      opacity: 0.08;
+      pointer-events: none;
     }
-    .card p {
-      padding: 10px;
-      margin: 0;
-      font-size: 1.1em;
+
+    .letter-display-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #eee;
     }
-    /* Estilos para la sección de cartas */
-    #letterInput {
-      width: 100%;
-      height: 200px;
-      padding: 10px;
-      font-size: 1em;
-      font-family: "Baskerville Old Face", "Libre Baskerville", serif;
-      box-sizing: border-box;
+
+    .letter-display-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--primary-color);
     }
+
+    .letter-display-date {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      color: #777;
+    }
+
     #letterDisplay {
-      margin-top: 20px;
-      background: #fff;
-      padding: 10px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      text-align: left;
-      font-family: "Baskerville Old Face", "Libre Baskerville", serif;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      line-height: 1.8;
       white-space: pre-wrap;
+      position: relative;
+      z-index: 10;
+      color: #333;
+      text-align: justify;
+      padding: 0 1rem;
+    }
+
+    .letter-signature {
+      text-align: right;
+      margin-top: 2rem;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.8rem;
+      color: var(--primary-color);
+    }
+
+    .decorative-line {
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--secondary-color), transparent);
+      margin: 2rem 0;
+    }
+
+    /* Animaciones */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in-up {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    /* Estados de carga */
+    .loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid rgba(142, 68, 173, 0.3);
+      border-radius: 50%;
+      border-top-color: var(--secondary-color);
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Notificaciones */
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: var(--shadow-medium);
+      z-index: 1000;
+      transform: translateX(150%);
+      transition: transform 0.3s ease;
+    }
+
+    .notification.show {
+      transform: translateX(0);
+    }
+
+    .notification-success {
+      background-color: #27ae60;
+    }
+
+    .notification-error {
+      background-color: #e74c3c;
+    }
+
+    /* Decoración */
+    .decoration-dots {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background-image: radial-gradient(#8e44ad 2px, transparent 2px);
+      background-size: 20px 20px;
+      opacity: 0.1;
+      z-index: -1;
+    }
+
+    .dots-top-right {
+      top: 50px;
+      right: 50px;
+    }
+
+    .dots-bottom-left {
+      bottom: 50px;
+      left: 50px;
+    }
+
+    /* Visor de imágenes */
+    .image-viewer-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--dark-color);
+      color: white;
+      padding: 3rem 0 2rem;
+      margin-top: 4rem;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    .footer-text {
+      max-width: 300px;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    .footer-links-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-link {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-link a {
+      color: #ddd;
+      text-decoration: none;
+      transition: var(--transition);
+      font-size: 0.9rem;
+    }
+
+    .footer-link a:hover {
+      color: var(--secondary-color);
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      transition: var(--transition);
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    .social-icon:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 1.5rem;
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    .heart-icon {
+      color: var(--accent-color);
+      margin: 0 5px;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .hero-title {
+        font-size: 3rem;
+      }
+      
+      .hero-subtitle {
+        font-size: 1.8rem;
+      }
+      
+      .section-title {
+        font-size: 2.2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        flex-direction: column;
+        gap: 0;
+        box-shadow: var(--shadow-soft);
+        padding: 1rem 0;
+      }
+      
+      .nav-links.show {
+        display: flex;
+      }
+      
+      .nav-link {
+        padding: 1rem 2rem;
+        width: 100%;
+        text-align: center;
+      }
+      
+      .menu-toggle {
+        display: block;
+      }
+      
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      
+      .hero-subtitle {
+        font-size: 1.5rem;
+      }
+      
+      .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      }
+      
+      .footer-content {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .container {
+        width: 95%;
+      }
+      
+      .section {
+        padding: 3rem 0;
+      }
+      
+      .hero-title {
+        font-size: 2rem;
+      }
+      
+      .hero-subtitle {
+        font-size: 1.2rem;
+      }
+      
+      .section-title {
+        font-size: 1.8rem;
+      }
+      
+      .card-container {
+        padding: 1.5rem;
+      }
+      
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+      
+      .letter-actions {
+        flex-direction: column;
+      }
+      
+      .btn {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Galería de Recuerdos Multiusuario</h1>
-  <div class="upload-container">
-    <!-- Sección para subir imágenes -->
-    <button id="upload_widget">Subir Imagen con Cloudinary</button>
-    <input type="text" id="descriptionInput" placeholder="Ej: 'En la playa con mi vida'">
-  </div>
-  <div class="gallery" id="gallery"></div>
+  <!-- Header / Navegación -->
+  <header>
+    <nav>
+      <div class="logo">
+        <i class="fas fa-heart"></i>
+        <span>Momentos & Sentimientos</span>
+      </div>
+      <div class="nav-links" id="navLinks">
+        <a href="#galeria" class="nav-link active">Galería</a>
+        <a href="#cartas" class="nav-link">Cartas</a>
+      </div>
+      <button class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+      </button>
+    </nav>
+  </header>
 
-  <h2>Cartas</h2>
-  <div class="letter-container">
-    <!-- Área para escribir la carta -->
-    <textarea id="letterInput" placeholder="Escribe tu carta aquí..."></textarea>
-    <button id="saveLetterButton">Guardar Carta</button>
-    <div id="letterDisplay"></div>
-  </div>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content" data-aos="fade-up">
+      <h1 class="hero-title">Nuestros Momentos Juntos</h1>
+      <p class="hero-subtitle">Guardando recuerdos y sentimientos para siempre</p>
+      <a href="#galeria" class="hero-btn">Explorar Galería</a>
+    </div>
+  </section>
 
-  <!-- Widget de Cloudinary -->
+  <!-- Main Content -->
+  <main>
+    <!-- Galería Section -->
+    <section id="galeria" class="section">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Galería de Recuerdos</h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+          Captura y comparte tus momentos especiales con fotos que cuentan nuestra historia.
+        </p>
+
+        <!-- Upload Container -->
+        <div class="card-container upload-container" data-aos="fade-up" data-aos-delay="200">
+          <h3 class="upload-title">Añadir un Nuevo Recuerdo</h3>
+          <div class="upload-form">
+            <button id="upload_widget" class="btn btn-primary">
+              <i class="fas fa-cloud-upload-alt"></i> Subir Imagen
+            </button>
+            <div class="input-group">
+              <input type="text" id="descriptionInput" placeholder=" ">
+              <label for="descriptionInput">Describe este momento especial...</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image Gallery -->
+        <div id="galleryLoading" class="loading">
+          <div class="loading-spinner"></div>
+        </div>
+        <div class="gallery" id="gallery">
+          <!-- Las tarjetas se generarán dinámicamente aquí -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Cartas Section -->
+    <section id="cartas" class="section">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Nuestras Cartas</h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+          Expresa tus sentimientos con palabras que perdurarán en el tiempo.
+        </p>
+
+        <!-- Letter Editor -->
+        <div class="card-container letter-container" data-aos="fade-up" data-aos-delay="200">
+          <div class="stationary-bg"></div>
+          <h3 class="letter-title">Escribe una Carta</h3>
+          <div class="letter-form">
+            <div class="letter-editor">
+              <textarea id="letterInput" placeholder="Querido/a..."></textarea>
+              <div class="letter-actions">
+                <button id="saveLetterButton" class="btn btn-secondary">
+                  <i class="fas fa-save"></i> Guardar Carta
+                </button>
+                <button id="clearLetterButton" class="btn btn-accent">
+                  <i class="fas fa-trash"></i> Limpiar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Letter Display -->
+        <div class="letter-display-container" data-aos="fade-up" data-aos-delay="300">
+          <div class="letter-display-header">
+            <h3 class="letter-display-title">Carta Guardada</h3>
+            <div class="letter-display-date" id="letterDate">Última actualización: <span>--</span></div>
+          </div>
+          <div id="letterDisplay"></div>
+          <div class="decorative-line"></div>
+          <div class="letter-signature">Con todo mi amor...</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-info">
+          <div class="footer-logo">Momentos & Sentimientos</div>
+          <p class="footer-text">Una plataforma para guardar nuestros recuerdos más especiales y compartir nuestros sentimientos a través de cartas.</p>
+          <div class="social-icons">
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+          </div>
+        </div>
+        <div class="footer-links-group">
+          <h4 class="footer-links-title">Enlaces</h4>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="#galeria">Galería</a></li>
+            <li class="footer-link"><a href="#cartas">Cartas</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Creado con <i class="fas fa-heart heart-icon"></i> para nuestros recuerdos especiales | &copy; <span id="currentYear"></span></p>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- Notificación -->
+  <div class="notification" id="notification"></div>
+  
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
-  <!-- Importa Firebase mediante módulos desde CDN -->
+  <!-- Firebase -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, query, orderBy, getDocs, serverTimestamp, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
-
-    // Configuración de Firebase (reemplaza con tus datos si es necesario)
+    import { 
+      getFirestore, 
+      collection, 
+      addDoc, 
+      query, 
+      orderBy, 
+      getDocs, 
+      deleteDoc,
+      doc,
+      getDoc,
+      setDoc,
+      updateDoc,
+      serverTimestamp 
+    } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
+  
+    // Inicialización de AOS
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 100
+    });
+  
+    // Año actual para el footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+  
+    // Toggle menú móvil
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+      menuToggle.innerHTML = navLinks.classList.contains('show') 
+        ? '<i class="fas fa-times"></i>' 
+        : '<i class="fas fa-bars"></i>';
+    });
+  
+    // Links de navegación
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        navLinks.classList.remove('show');
+        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+      });
+    });
+  
+    // Sistema de notificaciones
+    function showNotification(message, type = 'success') {
+      const notification = document.getElementById('notification');
+      notification.textContent = message;
+      notification.className = 'notification show';
+      
+      if (type === 'success') {
+        notification.classList.add('notification-success');
+      } else if (type === 'error') {
+        notification.classList.add('notification-error');
+      }
+      
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 3000);
+    }
+  
+    // Configuración de Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyBo9syn1q-HdylCyiDgd6tufD6LcrX0cek",
       authDomain: "only-for-you-bby.firebaseapp.com",
@@ -123,78 +1074,279 @@
       appId: "1:566014686966:web:28eab757f6802ac4371ed7",
       measurementId: "G-CHCNM92PYZ"
     };
-
+  
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
-
-    // Cloudinary: usa tu Cloud name y Upload Preset unsigned
+  
+    // Configuración de Cloudinary
     const cloudName = "dqdzng98y";
     const uploadPreset = "my_preset";
-
-    // Widget de Cloudinary para subir imágenes
-    var myWidget = cloudinary.createUploadWidget({
+  
+    // Widget de Cloudinary
+    const myWidget = cloudinary.createUploadWidget({
       cloudName: cloudName,
-      uploadPreset: uploadPreset
+      uploadPreset: uploadPreset,
+      cropping: true,
+      maxFiles: 1,
+      sources: ['local', 'camera', 'url'],
+      styles: {
+        palette: {
+          window: "#FFFFFF",
+          sourceBg: "#F4F4F5",
+          windowBorder: "#8e44ad",
+          tabIcon: "#8e44ad",
+          inactiveTabIcon: "#aaaaaa",
+          menuIcons: "#555555",
+          link: "#8e44ad",
+          action: "#339933",
+          inProgress: "#0433ff",
+          complete: "#339933",
+          error: "#cc3333",
+          textDark: "#000000",
+          textLight: "#fcfcfc"
+        }
+      }
     }, (error, result) => {
       if (!error && result && result.event === "success") {
-        console.log("Imagen subida:", result.info);
+        console.log("Imagen subida con éxito:", result.info);
+        
+        // Obtener datos de la imagen
         const imageUrl = result.info.secure_url;
         const description = document.getElementById("descriptionInput").value.trim();
+        
+        // Guardar en Firestore
         guardarImagenFirestore(imageUrl, description);
       }
     });
-
-    // Abre el widget al hacer clic
+  
+    // Abrir widget de Cloudinary
     document.getElementById("upload_widget").addEventListener("click", function() {
       myWidget.open();
-    }, false);
-
-    // Guarda la imagen y descripción en Firestore (colección "galeria")
+    });
+  
+    // Guardar imagen en Firestore
     async function guardarImagenFirestore(url, description) {
       try {
         await addDoc(collection(db, "galeria"), {
           imageURL: url,
-          description: description,
+          description: description || "Sin descripción",
           createdAt: serverTimestamp()
         });
+        
+        // Limpiar input
+        document.getElementById("descriptionInput").value = "";
+        
+        // Recargar galería
         cargarGaleria();
+        
+        // Mostrar notificación
+        showNotification("¡Imagen guardada con éxito!");
       } catch (error) {
-        console.error("Error al guardar en Firestore:", error);
+        console.error("Error al guardar la imagen:", error);
+        showNotification("Error al guardar la imagen", "error");
       }
     }
-
-    // Carga la galería desde Firestore y muestra las imágenes
+  
+    // Cargar galería desde Firestore
     async function cargarGaleria() {
       const gallery = document.getElementById("gallery");
+      const loadingElement = document.getElementById("galleryLoading");
+      
+      // Mostrar carga
       gallery.innerHTML = "";
+      loadingElement.style.display = "flex";
+      
       try {
         const q = query(collection(db, "galeria"), orderBy("createdAt", "desc"));
         const querySnapshot = await getDocs(q);
-        querySnapshot.forEach((doc) => {
+        
+        // Ocultar carga
+        loadingElement.style.display = "none";
+        
+        // Verificar si hay datos
+        if (querySnapshot.empty) {
+          gallery.innerHTML = `
+            <div class="empty-state" style="grid-column: 1/-1; text-align: center; padding: 3rem;">
+              <i class="far fa-images" style="font-size: 3rem; color: #ccc; margin-bottom: 1rem;"></i>
+              <h3>No hay recuerdos aún</h3>
+              <p>¡Comienza a subir imágenes para crear tu galería!</p>
+            </div>
+          `;
+          return;
+        }
+        
+        // Crear tarjetas para cada imagen
+        querySnapshot.forEach((doc, index) => {
           const data = doc.data();
           const card = document.createElement("div");
-          card.classList.add("card");
-
-          const img = document.createElement("img");
-          img.src = data.imageURL;
-
-          const desc = document.createElement("p");
-          desc.textContent = data.description || "Sin descripción";
-
-          card.appendChild(img);
-          card.appendChild(desc);
+          card.classList.add("gallery-card");
+          card.setAttribute("data-aos", "fade-up");
+          card.setAttribute("data-aos-delay", (index % 5) * 50);
+          
+          // Formatear fecha
+          let formattedDate = "Fecha no disponible";
+          if (data.createdAt) {
+            const date = data.createdAt.toDate();
+            formattedDate = new Intl.DateTimeFormat('es-ES', {
+              day: '2-digit',
+              month: 'long',
+              year: 'numeric'
+            }).format(date);
+          }
+          
+          // HTML de la tarjeta
+          card.innerHTML = `
+            <div class="gallery-img-container">
+              <img src="${data.imageURL}" alt="${data.description}" loading="lazy">
+            </div>
+            <div class="gallery-content">
+              <div class="gallery-date">${formattedDate}</div>
+              <p class="gallery-description" 
+                 contenteditable="true" 
+                 data-doc-id="${doc.id}" 
+                 data-original-text="${data.description}"
+                 onfocus="this.setAttribute('data-original-text', this.textContent.trim())"
+                 onblur="updateDescription(this)">${data.description}</p>
+              <div class="gallery-actions">
+                <button class="btn btn-primary gallery-btn view-image-btn" data-img="${data.imageURL}" data-desc="${data.description}">
+                  <i class="fas fa-eye"></i> Ver
+                </button>
+                <button class="btn btn-accent gallery-btn delete-image-btn" data-doc-id="${doc.id}">
+                  <i class="fas fa-trash"></i> Eliminar
+                </button>
+              </div>
+            </div>
+          `;
+          
           gallery.appendChild(card);
         });
+        
+        // Añadir event listeners a los botones
+        document.querySelectorAll('.delete-image-btn').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const docId = this.getAttribute('data-doc-id');
+            confirmarEliminarImagen(docId);
+          });
+        });
+        
+        document.querySelectorAll('.view-image-btn').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const imgUrl = this.getAttribute('data-img');
+            const imgDesc = this.getAttribute('data-desc');
+            abrirVisorImagen(imgUrl, imgDesc);
+          });
+        });
+        
       } catch (error) {
         console.error("Error al cargar la galería:", error);
+        loadingElement.style.display = "none";
+        gallery.innerHTML = `
+          <div style="grid-column: 1/-1; text-align: center; padding: 2rem;">
+            <p>Error al cargar las imágenes. Intenta de nuevo más tarde.</p>
+          </div>
+        `;
       }
     }
-
-    // Funciones para la sección de cartas
-    // Usaremos un documento único "cartaGeneral" en la colección "cartas"
+    
+    // Función global para actualizar la descripción
+    window.updateDescription = async function(element) {
+      const docId = element.getAttribute('data-doc-id');
+      const newText = element.textContent.trim();
+      const originalText = element.getAttribute('data-original-text');
+      
+      // Solo actualizar si cambió el texto
+      if (newText !== originalText && newText !== '') {
+        try {
+          const docRef = doc(db, "galeria", docId);
+          await updateDoc(docRef, {
+            description: newText
+          });
+          showNotification("Descripción actualizada");
+        } catch (error) {
+          console.error("Error al actualizar descripción:", error);
+          element.textContent = originalText;
+          showNotification("Error al actualizar descripción", "error");
+        }
+      } else if (newText === '') {
+        element.textContent = originalText;
+        showNotification("La descripción no puede estar vacía", "error");
+      }
+    };
+    
+    // Confirmar eliminación de imagen
+    function confirmarEliminarImagen(docId) {
+      if (confirm("¿Estás seguro de que quieres eliminar este recuerdo?")) {
+        eliminarImagen(docId);
+      }
+    }
+    
+    // Eliminar imagen de Firestore
+    async function eliminarImagen(docId) {
+      try {
+        await deleteDoc(doc(db, "galeria", docId));
+        cargarGaleria();
+        showNotification("Recuerdo eliminado correctamente");
+      } catch (error) {
+        console.error("Error al eliminar la imagen:", error);
+        showNotification("Error al eliminar el recuerdo", "error");
+      }
+    }
+    
+    // Abrir visor de imagen
+    function abrirVisorImagen(imgUrl, imgDesc) {
+      // Crear modal para ver la imagen
+      const modal = document.createElement('div');
+      modal.className = 'image-viewer-modal';
+      modal.style.position = 'fixed';
+      modal.style.top = '0';
+      modal.style.left = '0';
+      modal.style.width = '100%';
+      modal.style.height = '100%';
+      modal.style.backgroundColor = 'rgba(0,0,0,0.9)';
+      modal.style.display = 'flex';
+      modal.style.alignItems = 'center';
+      modal.style.justifyContent = 'center';
+      modal.style.zIndex = '1000';
+      modal.style.opacity = '0';
+      modal.style.transition = 'opacity 0.3s ease';
+      
+      modal.innerHTML = `
+        <div style="position: relative; max-width: 90%; max-height: 90%;">
+          <img src="${imgUrl}" alt="${imgDesc}" style="max-width: 100%; max-height: 85vh; border-radius: 5px;">
+          <div style="position: absolute; top: 15px; right: 15px;">
+            <button class="close-viewer-btn" style="background: rgba(0,0,0,0.6); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 20px;">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div style="background: rgba(255,255,255,0.9); padding: 15px; border-radius: 0 0 5px 5px; margin-top: 5px;">
+            <p style="margin: 0; font-size: 1.1rem;">${imgDesc}</p>
+          </div>
+        </div>
+      `;
+      
+      document.body.appendChild(modal);
+      
+      // Animar entrada
+      setTimeout(() => {
+        modal.style.opacity = '1';
+      }, 10);
+      
+      // Cerrar al hacer clic en el botón o fuera de la imagen
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal || e.target.closest('.close-viewer-btn')) {
+          modal.style.opacity = '0';
+          setTimeout(() => {
+            document.body.removeChild(modal);
+          }, 300);
+        }
+      });
+    }
+  
+    // Funciones para las cartas
     const letterDocRef = doc(db, "cartas", "cartaGeneral");
-
-    // Carga la carta desde Firestore
+    const clearLetterButton = document.getElementById("clearLetterButton");
+    
+    // Cargar carta desde Firestore
     async function loadLetter() {
       try {
         const docSnap = await getDoc(letterDocRef);
@@ -202,35 +1354,74 @@
           const data = docSnap.data();
           document.getElementById("letterInput").value = data.content || "";
           document.getElementById("letterDisplay").textContent = data.content || "";
+          
+          // Actualizar fecha
+          if (data.updatedAt) {
+            const date = data.updatedAt.toDate();
+            const formattedDate = new Intl.DateTimeFormat('es-ES', {
+              day: '2-digit',
+              month: 'long',
+              year: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit'
+            }).format(date);
+            document.querySelector('#letterDate span').textContent = formattedDate;
+          }
         } else {
           document.getElementById("letterDisplay").textContent = "No hay cartas guardadas.";
         }
       } catch (error) {
         console.error("Error al cargar la carta:", error);
+        showNotification("Error al cargar la carta", "error");
       }
     }
-
-    // Guarda o actualiza la carta en Firestore
+  
+    // Guardar carta en Firestore
     async function saveLetter() {
-      const content = document.getElementById("letterInput").value;
+      const content = document.getElementById("letterInput").value.trim();
+      
+      if (!content) {
+        showNotification("La carta no puede estar vacía", "error");
+        return;
+      }
+      
       try {
         await setDoc(letterDocRef, {
           content: content,
           updatedAt: serverTimestamp()
         });
         loadLetter();
+        showNotification("Carta guardada con éxito");
       } catch (error) {
         console.error("Error al guardar la carta:", error);
+        showNotification("Error al guardar la carta", "error");
       }
     }
-
+    
+    // Limpiar carta
+    clearLetterButton.addEventListener("click", function() {
+      if (confirm("¿Estás seguro de que quieres limpiar el contenido de la carta?")) {
+        document.getElementById("letterInput").value = "";
+      }
+    });
+  
+    // Event listener para guardar carta
     document.getElementById("saveLetterButton").addEventListener("click", saveLetter);
-
-    // Cargar la galería y la carta al cargar la página
+  
+    // Inicializar la página
     window.addEventListener("load", () => {
       cargarGaleria();
       loadLetter();
     });
+    
+    // Smooth scroll para links de navegación
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
   </script>
-</body>
-</html>
