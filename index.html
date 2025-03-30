@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Momentos & Sentimientos</title>
+  <title>❤️‍🔥Momentos & Sentimientos❤️‍🔥</title>
   <!-- Fuentes de Google -->
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
   <!-- Font Awesome para iconos -->
@@ -165,39 +165,10 @@
 
     .hero-title {
       font-family: 'Playfair Display', serif;
-      font-size: 3.5rem;
+      font-size: 2.8rem;
       color: white;
       margin-bottom: 1rem;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    }
-
-    .hero-subtitle {
-      font-family: 'Dancing Script', cursive;
-      font-size: 2rem;
-      color: var(--light-color);
-      margin-bottom: 2rem;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-    }
-
-    .hero-btn {
-      background-color: var(--secondary-color);
-      color: white;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1rem;
-      font-weight: 600;
-      padding: 0.8rem 2rem;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: var(--transition);
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .hero-btn:hover {
-      background-color: #7d3c98;
-      transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     }
 
     /* Secciones principales */
@@ -415,10 +386,18 @@
       flex-direction: column;
     }
 
-    .gallery-date {
+    .gallery-date, .gallery-location {
       font-size: 0.85rem;
       color: #777;
       margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .gallery-date i, .gallery-location i {
+      font-size: 0.9rem;
+      color: var(--secondary-color);
     }
 
     .gallery-description {
@@ -427,6 +406,20 @@
       margin-bottom: 1rem;
       line-height: 1.4;
       flex-grow: 1;
+    }
+
+    .gallery-editable:hover {
+      background-color: rgba(142, 68, 173, 0.05);
+      border-radius: 4px;
+      cursor: text;
+    }
+
+    .gallery-editable:focus {
+      outline: none;
+      background-color: rgba(142, 68, 173, 0.1);
+      padding: 2px 5px;
+      margin: -2px -5px;
+      border-radius: 4px;
     }
 
     .gallery-actions {
@@ -494,7 +487,71 @@
       gap: 1rem;
     }
 
-    /* Letter Display */
+    /* Letter Cards Display */
+    .letter-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .letter-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: var(--shadow-soft);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      height: 100%;
+      position: relative;
+    }
+
+    .letter-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .letter-card-header {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .letter-card-date {
+      font-size: 0.85rem;
+      color: #777;
+    }
+
+    .letter-card-content {
+      padding: 1.5rem;
+      flex-grow: 1;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .letter-card-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #333;
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .letter-card-footer {
+      padding: 1rem 1.5rem;
+      border-top: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Letter Display Full */
     .letter-display-container {
       margin-top: 3rem;
       padding: 2rem;
@@ -540,7 +597,7 @@
       color: #777;
     }
 
-    #letterDisplay {
+    .letter-display-content {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.2rem;
       line-height: 1.8;
@@ -633,27 +690,6 @@
       background-color: #e74c3c;
     }
 
-    /* Decoración */
-    .decoration-dots {
-      position: absolute;
-      width: 200px;
-      height: 200px;
-      background-image: radial-gradient(#8e44ad 2px, transparent 2px);
-      background-size: 20px 20px;
-      opacity: 0.1;
-      z-index: -1;
-    }
-
-    .dots-top-right {
-      top: 50px;
-      right: 50px;
-    }
-
-    .dots-bottom-left {
-      bottom: 50px;
-      left: 50px;
-    }
-
     /* Visor de imágenes */
     .image-viewer-modal {
       position: fixed;
@@ -668,6 +704,97 @@
       z-index: 1000;
       opacity: 0;
       transition: opacity 0.3s ease;
+    }
+
+    /* Modal carta completa */
+    .letter-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .letter-modal.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .letter-modal-content {
+      background: white;
+      width: 90%;
+      max-width: 800px;
+      max-height: 90vh;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+      position: relative;
+    }
+
+    .letter-modal.show .letter-modal-content {
+      transform: scale(1);
+    }
+
+    .letter-modal-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .letter-modal-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--primary-color);
+    }
+
+    .letter-modal-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #999;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .letter-modal-close:hover {
+      color: var(--accent-color);
+    }
+
+    .letter-modal-body {
+      padding: 2rem;
+      overflow-y: auto;
+      flex-grow: 1;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      line-height: 1.8;
+      white-space: pre-wrap;
+      color: #333;
+      background-image: url('https://img.freepik.com/free-photo/white-paper-texture_1194-5998.jpg?w=1000');
+      background-size: cover;
+      background-blend-mode: overlay;
+      background-color: rgba(255, 255, 255, 0.97);
+    }
+
+    .letter-modal-footer {
+      padding: 1.5rem;
+      border-top: 1px solid #eee;
+      text-align: right;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.8rem;
+      color: var(--primary-color);
     }
 
     /* Footer */
@@ -726,29 +853,6 @@
       color: var(--secondary-color);
     }
 
-    .social-icons {
-      display: flex;
-      gap: 1rem;
-    }
-
-    .social-icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
-      transition: var(--transition);
-      color: white;
-      font-size: 1.2rem;
-    }
-
-    .social-icon:hover {
-      background-color: var(--secondary-color);
-      transform: translateY(-3px);
-    }
-
     .footer-bottom {
       border-top: 1px solid rgba(255, 255, 255, 0.1);
       padding-top: 1.5rem;
@@ -766,15 +870,15 @@
     /* Responsive */
     @media (max-width: 992px) {
       .hero-title {
-        font-size: 3rem;
-      }
-      
-      .hero-subtitle {
-        font-size: 1.8rem;
+        font-size: 2.5rem;
       }
       
       .section-title {
         font-size: 2.2rem;
+      }
+      
+      .letter-cards {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       }
     }
 
@@ -807,11 +911,7 @@
       }
       
       .hero-title {
-        font-size: 2.5rem;
-      }
-      
-      .hero-subtitle {
-        font-size: 1.5rem;
+        font-size: 2.2rem;
       }
       
       .gallery {
@@ -833,11 +933,7 @@
       }
       
       .hero-title {
-        font-size: 2rem;
-      }
-      
-      .hero-subtitle {
-        font-size: 1.2rem;
+        font-size: 1.8rem;
       }
       
       .section-title {
@@ -852,6 +948,10 @@
         grid-template-columns: 1fr;
       }
       
+      .letter-cards {
+        grid-template-columns: 1fr;
+      }
+      
       .letter-actions {
         flex-direction: column;
       }
@@ -860,11 +960,37 @@
         width: 100%;
       }
     }
+
+    /* Placeholder para estado vacío */
+    .empty-state {
+      text-align: center;
+      padding: 3rem 2rem;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .empty-state i {
+      font-size: 3rem;
+      color: #ddd;
+      margin-bottom: 1rem;
+    }
+
+    .empty-state h3 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    .empty-state p {
+      color: #777;
+      margin-bottom: 1.5rem;
+    }
   </style>
 </head>
 <body>
   <!-- Header / Navegación -->
-  <header>
+<header>
     <nav>
       <div class="logo">
         <i class="fas fa-heart"></i>
@@ -879,17 +1005,16 @@
       </button>
     </nav>
   </header>
-
+  
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-overlay"></div>
     <div class="hero-content" data-aos="fade-up">
       <h1 class="hero-title">Nuestros Momentos Juntos</h1>
-      <p class="hero-subtitle">Guardando recuerdos y sentimientos para siempre</p>
       <a href="#galeria" class="hero-btn">Explorar Galería</a>
     </div>
   </section>
-
+  
   <!-- Main Content -->
   <main>
     <!-- Galería Section -->
@@ -899,7 +1024,7 @@
         <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
           Captura y comparte tus momentos especiales con fotos que cuentan nuestra historia.
         </p>
-
+  
         <!-- Upload Container -->
         <div class="card-container upload-container" data-aos="fade-up" data-aos-delay="200">
           <h3 class="upload-title">Añadir un Nuevo Recuerdo</h3>
@@ -911,9 +1036,17 @@
               <input type="text" id="descriptionInput" placeholder=" ">
               <label for="descriptionInput">Describe este momento especial...</label>
             </div>
+            <div class="input-group">
+              <input type="text" id="locationInput" placeholder=" ">
+              <label for="locationInput">Lugar (opcional)</label>
+            </div>
+            <div class="input-group">
+              <input type="date" id="dateInput" placeholder=" ">
+              <label for="dateInput" style="transform: translateY(-1.5rem); font-size: 0.8rem; background: white;">Fecha (opcional)</label>
+            </div>
           </div>
         </div>
-
+  
         <!-- Image Gallery -->
         <div id="galleryLoading" class="loading">
           <div class="loading-spinner"></div>
@@ -923,22 +1056,22 @@
         </div>
       </div>
     </section>
-
+  
     <!-- Cartas Section -->
     <section id="cartas" class="section">
       <div class="container">
         <h2 class="section-title" data-aos="fade-up">Nuestras Cartas</h2>
         <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
-          Expresa tus sentimientos con palabras que perdurarán en el tiempo.
+          Expresa tus sentimientos con palabras quiero que perduren en el tiempo y venir aqui a leerlas.
         </p>
-
+  
         <!-- Letter Editor -->
         <div class="card-container letter-container" data-aos="fade-up" data-aos-delay="200">
           <div class="stationary-bg"></div>
           <h3 class="letter-title">Escribe una Carta</h3>
           <div class="letter-form">
             <div class="letter-editor">
-              <textarea id="letterInput" placeholder="Querido/a..."></textarea>
+              <textarea id="letterInput" placeholder="escribe algo tontita ❤️"></textarea>
               <div class="letter-actions">
                 <button id="saveLetterButton" class="btn btn-secondary">
                   <i class="fas fa-save"></i> Guardar Carta
@@ -950,33 +1083,39 @@
             </div>
           </div>
         </div>
-
-        <!-- Letter Display -->
-        <div class="letter-display-container" data-aos="fade-up" data-aos-delay="300">
-          <div class="letter-display-header">
-            <h3 class="letter-display-title">Carta Guardada</h3>
-            <div class="letter-display-date" id="letterDate">Última actualización: <span>--</span></div>
-          </div>
-          <div id="letterDisplay"></div>
-          <div class="decorative-line"></div>
-          <div class="letter-signature">Con todo mi amor...</div>
+  
+        <!-- Letter Cards -->
+        <div id="letterCardsLoading" class="loading">
+          <div class="loading-spinner"></div>
+        </div>
+        <div class="letter-cards" id="letterCards">
+          <!-- Las tarjetas de cartas se generarán dinámicamente aquí -->
         </div>
       </div>
     </section>
   </main>
-
-<!-- Footer -->
-<footer>
+  
+  <!-- Letter Modal (para ver carta completa) -->
+  <div id="letterModal" class="letter-modal">
+    <div class="letter-modal-content">
+      <div class="letter-modal-header">
+        <h2 class="letter-modal-title">Carta</h2>
+        <button class="letter-modal-close" id="letterModalClose">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="letter-modal-body" id="letterModalBody"></div>
+      <div class="letter-modal-footer">Con todo mi amor...</div>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <footer>
     <div class="container">
       <div class="footer-content">
         <div class="footer-info">
           <div class="footer-logo">Momentos & Sentimientos</div>
-          <p class="footer-text">Una plataforma para guardar nuestros recuerdos más especiales y compartir nuestros sentimientos a través de cartas.</p>
-          <div class="social-icons">
-            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
-          </div>
+          <p class="footer-text">Una plataforma para guardar nuestros recuerdos más especiales y compartir nuestros sentimientos a través de cartas y momentos D🧡D.</p>
         </div>
         <div class="footer-links-group">
           <h4 class="footer-links-title">Enlaces</h4>
@@ -1113,9 +1252,11 @@
         // Obtener datos de la imagen
         const imageUrl = result.info.secure_url;
         const description = document.getElementById("descriptionInput").value.trim();
+        const location = document.getElementById("locationInput").value.trim();
+        const customDate = document.getElementById("dateInput").value;
         
         // Guardar en Firestore
-        guardarImagenFirestore(imageUrl, description);
+        guardarImagenFirestore(imageUrl, description, location, customDate);
       }
     });
   
@@ -1125,16 +1266,27 @@
     });
   
     // Guardar imagen en Firestore
-    async function guardarImagenFirestore(url, description) {
+    async function guardarImagenFirestore(url, description, location = "", customDate = "") {
       try {
-        await addDoc(collection(db, "galeria"), {
+        // Datos para guardar
+        const imageData = {
           imageURL: url,
           description: description || "Sin descripción",
+          location: location || "",
           createdAt: serverTimestamp()
-        });
+        };
         
-        // Limpiar input
+        // Si hay una fecha personalizada, se agrega al objeto
+        if (customDate) {
+          imageData.customDate = customDate;
+        }
+        
+        await addDoc(collection(db, "galeria"), imageData);
+        
+        // Limpiar inputs
         document.getElementById("descriptionInput").value = "";
+        document.getElementById("locationInput").value = "";
+        document.getElementById("dateInput").value = "";
         
         // Recargar galería
         cargarGaleria();
@@ -1184,14 +1336,25 @@
           card.setAttribute("data-aos-delay", (index % 5) * 50);
           
           // Formatear fecha
-          let formattedDate = "Fecha no disponible";
-          if (data.createdAt) {
+          let formattedDate = "";
+          
+          // Priorizar la fecha personalizada si existe
+          if (data.customDate) {
+            const customDate = new Date(data.customDate);
+            formattedDate = new Intl.DateTimeFormat('es-ES', {
+              day: '2-digit',
+              month: 'long',
+              year: 'numeric'
+            }).format(customDate);
+          } else if (data.createdAt) {
             const date = data.createdAt.toDate();
             formattedDate = new Intl.DateTimeFormat('es-ES', {
               day: '2-digit',
               month: 'long',
               year: 'numeric'
             }).format(date);
+          } else {
+            formattedDate = "Fecha no disponible";
           }
           
           // HTML de la tarjeta
@@ -1200,13 +1363,33 @@
               <img src="${data.imageURL}" alt="${data.description}" loading="lazy">
             </div>
             <div class="gallery-content">
-              <div class="gallery-date">${formattedDate}</div>
-              <p class="gallery-description" 
+              <div class="gallery-date gallery-editable" 
+                  contenteditable="true" 
+                  data-doc-id="${doc.id}" 
+                  data-field="customDate"
+                  data-original-text="${formattedDate}"
+                  onfocus="this.setAttribute('data-original-text', this.textContent.trim())"
+                  onblur="updateImageField(this)">
+                <i class="fas fa-calendar"></i> ${formattedDate}
+              </div>
+              
+              <div class="gallery-location gallery-editable" 
+                  contenteditable="true" 
+                  data-doc-id="${doc.id}" 
+                  data-field="location"
+                  data-original-text="${data.location || 'Agregar ubicación...'}"
+                  onfocus="this.setAttribute('data-original-text', this.textContent.trim())"
+                  onblur="updateImageField(this)">
+                <i class="fas fa-map-marker-alt"></i> ${data.location || 'Agregar ubicación...'}
+              </div>
+              
+              <p class="gallery-description gallery-editable" 
                  contenteditable="true" 
                  data-doc-id="${doc.id}" 
+                 data-field="description"
                  data-original-text="${data.description}"
                  onfocus="this.setAttribute('data-original-text', this.textContent.trim())"
-                 onblur="updateDescription(this)">${data.description}</p>
+                 onblur="updateImageField(this)">${data.description}</p>
               <div class="gallery-actions">
                 <button class="btn btn-primary gallery-btn view-image-btn" data-img="${data.imageURL}" data-desc="${data.description}">
                   <i class="fas fa-eye"></i> Ver
@@ -1248,28 +1431,69 @@
       }
     }
     
-    // Función global para actualizar la descripción
-    window.updateDescription = async function(element) {
+    // Función global para actualizar cualquier campo de la imagen
+    window.updateImageField = async function(element) {
       const docId = element.getAttribute('data-doc-id');
-      const newText = element.textContent.trim();
+      const field = element.getAttribute('data-field');
+      let newText = element.textContent.trim();
       const originalText = element.getAttribute('data-original-text');
       
-      // Solo actualizar si cambió el texto
-      if (newText !== originalText && newText !== '') {
+      // Eliminar el icono del texto
+      if (field === 'location') {
+        newText = newText.replace('Agregar ubicación...', '').replace(/^\s*\u{f3c5}\s*/u, '').trim();
+      } else if (field === 'customDate') {
+        newText = newText.replace(/^\s*\u{f133}\s*/u, '').trim();
+      }
+      
+      // Solo actualizar si cambió el texto y no está vacío (excepto para ubicación)
+      if (newText !== originalText && (newText !== '' || field === 'location')) {
         try {
           const docRef = doc(db, "galeria", docId);
-          await updateDoc(docRef, {
-            description: newText
-          });
-          showNotification("Descripción actualizada");
+          const updateData = {};
+          
+          // Para fechas, intentamos convertir a formato fecha
+          if (field === 'customDate') {
+            try {
+              // Intentar guardar como string por ahora
+              updateData[field] = newText;
+            } catch (e) {
+              console.error("Error al convertir fecha:", e);
+              element.textContent = originalText;
+              showNotification("Formato de fecha inválido", "error");
+              return;
+            }
+          } else {
+            updateData[field] = newText;
+          }
+          
+          await updateDoc(docRef, updateData);
+          showNotification("Información actualizada", "success");
+          
+          // Actualizar el elemento con icon
+          if (field === 'location') {
+            element.innerHTML = `<i class="fas fa-map-marker-alt"></i> ${newText || 'Agregar ubicación...'}`;
+          } else if (field === 'customDate') {
+            element.innerHTML = `<i class="fas fa-calendar"></i> ${newText}`;
+          }
+          
         } catch (error) {
-          console.error("Error al actualizar descripción:", error);
-          element.textContent = originalText;
-          showNotification("Error al actualizar descripción", "error");
+          console.error(`Error al actualizar ${field}:`, error);
+          if (field === 'location') {
+            element.innerHTML = `<i class="fas fa-map-marker-alt"></i> ${originalText}`;
+          } else if (field === 'customDate') {
+            element.innerHTML = `<i class="fas fa-calendar"></i> ${originalText}`;
+          } else {
+            element.textContent = originalText;
+          }
+          showNotification(`Error al actualizar ${field}`, "error");
         }
-      } else if (newText === '') {
-        element.textContent = originalText;
-        showNotification("La descripción no puede estar vacía", "error");
+      } else if (newText === '' && field !== 'location') {
+        if (field === 'customDate') {
+          element.innerHTML = `<i class="fas fa-calendar"></i> ${originalText}`;
+        } else {
+          element.textContent = originalText;
+        }
+        showNotification("El campo no puede estar vacío", "error");
       }
     };
     
@@ -1342,42 +1566,10 @@
       });
     }
   
-    // Funciones para las cartas
-    const letterDocRef = doc(db, "cartas", "cartaGeneral");
-    const clearLetterButton = document.getElementById("clearLetterButton");
+    // ============ FUNCIONES PARA LAS CARTAS ============
     
-    // Cargar carta desde Firestore
-    async function loadLetter() {
-      try {
-        const docSnap = await getDoc(letterDocRef);
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-          document.getElementById("letterInput").value = data.content || "";
-          document.getElementById("letterDisplay").textContent = data.content || "";
-          
-          // Actualizar fecha
-          if (data.updatedAt) {
-            const date = data.updatedAt.toDate();
-            const formattedDate = new Intl.DateTimeFormat('es-ES', {
-              day: '2-digit',
-              month: 'long',
-              year: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit'
-            }).format(date);
-            document.querySelector('#letterDate span').textContent = formattedDate;
-          }
-        } else {
-          document.getElementById("letterDisplay").textContent = "No hay cartas guardadas.";
-        }
-      } catch (error) {
-        console.error("Error al cargar la carta:", error);
-        showNotification("Error al cargar la carta", "error");
-      }
-    }
-  
-    // Guardar carta en Firestore
-    async function saveLetter() {
+    // Guardar una nueva carta
+    async function saveNewLetter() {
       const content = document.getElementById("letterInput").value.trim();
       
       if (!content) {
@@ -1386,11 +1578,18 @@
       }
       
       try {
-        await setDoc(letterDocRef, {
+        // Crear un nuevo documento en la colección "cartas"
+        await addDoc(collection(db, "cartas"), {
           content: content,
-          updatedAt: serverTimestamp()
+          createdAt: serverTimestamp()
         });
-        loadLetter();
+        
+        // Limpiar el textarea
+        document.getElementById("letterInput").value = "";
+        
+        // Recargar las cartas
+        cargarCartas();
+        
         showNotification("Carta guardada con éxito");
       } catch (error) {
         console.error("Error al guardar la carta:", error);
@@ -1398,30 +1597,199 @@
       }
     }
     
-    // Limpiar carta
-    clearLetterButton.addEventListener("click", function() {
-      if (confirm("¿Estás seguro de que quieres limpiar el contenido de la carta?")) {
-        document.getElementById("letterInput").value = "";
-      }
-    });
-  
-    // Event listener para guardar carta
-    document.getElementById("saveLetterButton").addEventListener("click", saveLetter);
-  
-    // Inicializar la página
-    window.addEventListener("load", () => {
-      cargarGaleria();
-      loadLetter();
-    });
-    
-    // Smooth scroll para links de navegación
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
+    // Cargar todas las cartas
+    async function cargarCartas() {
+      const cardsContainer = document.getElementById("letterCards");
+      const loadingElement = document.getElementById("letterCardsLoading");
+      
+      // Mostrar carga
+      cardsContainer.innerHTML = "";
+      loadingElement.style.display = "flex";
+      
+      try {
+        const q = query(collection(db, "cartas"), orderBy("createdAt", "desc"));
+        const querySnapshot = await getDocs(q);
         
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
+        // Ocultar carga
+        loadingElement.style.display = "none";
+        
+        // Verificar si hay cartas
+        if (querySnapshot.empty) {
+          cardsContainer.innerHTML = `
+            <div class="empty-state" style="grid-column: 1/-1; text-align: center; padding: 3rem;">
+              <i class="far fa-envelope" style="font-size: 3rem; color: #ccc; margin-bottom: 1rem;"></i>
+              <h3>No hay cartas guardadas</h3>
+              <p>Escribe una carta para expresar tus sentimientos.</p>
+            </div>
+          `;
+          return;
+        }
+        
+        // Crear tarjetas para cada carta
+        querySnapshot.forEach((doc, index) => {
+          const data = doc.data();
+          const card = document.createElement("div");
+          card.classList.add("letter-card");
+          card.setAttribute("data-aos", "fade-up");
+          card.setAttribute("data-aos-delay", (index % 5) * 50);
+          
+          // Formatear fecha
+          let formattedDate = "Fecha no disponible";
+          if (data.createdAt) {
+            const date = data.createdAt.toDate();
+            formattedDate = new Intl.DateTimeFormat('es-ES', {
+              day: '2-digit',
+              month: 'long',
+              year: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit'
+            }).format(date);
+          }
+          
+          // Extraer un resumen del contenido (primeras palabras)
+          const contentPreview = data.content.length > 150 
+            ? data.content.substring(0, 150) + "..."
+            : data.content;
+          
+          card.innerHTML = `
+            <div class="letter-card-header">
+              <div class="letter-card-date">
+                <i class="fas fa-calendar"></i> ${formattedDate}
+              </div>
+            </div>
+            <div class="letter-card-content">
+              <div class="letter-card-text">${contentPreview}</div>
+            </div>
+            <div class="letter-card-footer">
+              <button class="btn btn-primary gallery-btn view-letter-btn" data-letter-id="${doc.id}">
+                <i class="fas fa-book-open"></i> Leer
+              </button>
+              <button class="btn btn-accent gallery-btn delete-letter-btn" data-letter-id="${doc.id}">
+                <i class="fas fa-trash"></i> Eliminar
+              </button>
+            </div>
+          `;
+          
+          cardsContainer.appendChild(card);
         });
+        
+        // Añadir event listeners a los botones
+        document.querySelectorAll('.view-letter-btn').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const letterId = this.getAttribute('data-letter-id');
+            abrirCartaCompleta(letterId);
+          });
+        });
+        
+        document.querySelectorAll('.delete-letter-btn').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const letterId = this.getAttribute('data-letter-id');
+            confirmarEliminarCarta(letterId);
+          });
+        });
+        
+      } catch (error) {
+        console.error("Error al cargar las cartas:", error);
+        loadingElement.style.display = "none";
+        cardsContainer.innerHTML = `
+          <div style="grid-column: 1/-1; text-align: center; padding: 2rem;">
+            <p>Error al cargar las cartas. Intenta de nuevo más tarde.</p>
+          </div>
+        `;
+      }
+    }
+    
+    // Abrir carta completa en modal
+    async function abrirCartaCompleta(letterId) {
+      try {
+        const docRef = doc(db, "cartas", letterId);
+        const docSnap = await getDoc(docRef);
+        
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          
+          // Llenar contenido del modal
+          document.getElementById("letterModalBody").textContent = data.content;
+          
+          // Mostrar modal
+          const modal = document.getElementById("letterModal");
+          modal.classList.add("show");
+          
+          // Deshabilitar scroll del body
+          document.body.style.overflow = "hidden";
+        } else {
+          showNotification("No se pudo encontrar la carta", "error");
+        }
+      } catch (error) {
+        console.error("Error al abrir la carta:", error);
+        showNotification("Error al abrir la carta", "error");
+      }
+    }
+    
+    // Confirmar eliminación de carta
+    function confirmarEliminarCarta(letterId) {
+      if (confirm("¿Estás seguro de que quieres eliminar esta carta?")) {
+        eliminarCarta(letterId);
+      }
+    }
+    
+    // Eliminar carta
+async function eliminarCarta(letterId) {
+    try {
+      await deleteDoc(doc(db, "cartas", letterId));
+      cargarCartas();
+      showNotification("Carta eliminada correctamente");
+    } catch (error) {
+      console.error("Error al eliminar la carta:", error);
+      showNotification("Error al eliminar la carta", "error");
+    }
+  }
+  
+  // Cerrar modal de carta
+  document.getElementById("letterModalClose").addEventListener("click", () => {
+    closeLetterModal();
+  });
+  
+  // También cerrar al hacer clic fuera del contenido
+  document.getElementById("letterModal").addEventListener("click", (e) => {
+    if (e.target === document.getElementById("letterModal")) {
+      closeLetterModal();
+    }
+  });
+  
+  // Función para cerrar el modal de carta
+  function closeLetterModal() {
+    const modal = document.getElementById("letterModal");
+    modal.classList.remove("show");
+    document.body.style.overflow = "";
+  }
+  
+  // Limpiar carta
+  document.getElementById("clearLetterButton").addEventListener("click", function() {
+    if (confirm("¿Estás seguro de que quieres limpiar el contenido de la carta?")) {
+      document.getElementById("letterInput").value = "";
+    }
+  });
+  
+  // Event listener para guardar nueva carta
+  document.getElementById("saveLetterButton").addEventListener("click", saveNewLetter);
+  
+  // Inicializar la página
+  window.addEventListener("load", () => {
+    cargarGaleria();
+    cargarCartas();
+  });
+  
+  // Smooth scroll para links de navegación
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
       });
     });
+  });
   </script>
+  </body>
+  </html>
